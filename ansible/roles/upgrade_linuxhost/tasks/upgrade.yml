@@ -1,0 +1,74 @@
+---
+
+################################## The below task will be run on Linux Hosts to Upgrade kernel and security packages ################
+
+- name: Task 1 - Grab the kernel version  before upgrade
+  command: uname -r
+  register: Previous_Kernel_Versions
+  become: yes
+  tags:
+    - upgrade
+    
+- name: Task 2 - Upgrade latest packages on Linux hosts
+  package:
+    name: "*"
+    state: latest
+  register: update_result
+  become: yes
+  tags:
+    - upgrade
+  ignore_errors: true
+
+
+- name: Task 3 - Running Reboot task on Linux hosts
+  reboot: 
+    reboot_timeout: 3600
+    test_command: uptime | cut -d ',' -f5
+  become: yes
+  tags:
+    - reboot
+  
+
+- name: Task 4 - Grab the uptime report 
+  shell: uptime | cut -d ',' -f1
+  register: uptime
+  become: yes
+  tags:
+    - upgrade
+
+- name: Task 5 - Grab the new kernel version after upgrade
+  command: uname -r
+  register: New_Kernel_Versions
+  become: yes
+  tags:
+    - upgrade
+
+- name: Task 6 - Build out CSV content
+  set_fact:
+    dev_info: "{{ ansible_hostname }},{{ ansible_default_ipv4.address }},{{ Previous_Kernel_Versions.stdout }},{{ New_Kernel_Versions.stdout }},{{ uptime.stdout }},{{ New_Kernel_Versions.stdout|string() != Previous_Kernel_Versions.stdout|string() }}"
+  become: yes
+  tags:
+    - upgrade
+
+################ The below two task will be run in localhost  #################
+
+- name: Generate CSV file
+  template: 
+    src: templates/upgrade.txt.j2 
+    dest: "{{ csv_path }}/{{ csv_filename }}"
+  delegate_to: localhost
+
+- name: Send Email
+  mail:
+    host: "{{ email_host }}"
+    from: "{{ email_from }}"
+    port: 25
+    to: "{{ email_to }}"
+    subject: "[Ansible] *{{ email_subject }}*"
+    body: "{{ lookup('template', 'templates/report.html.j2', errors='ignore') }}"
+    attach: "{{ csv_path }}/{{ csv_filename }}"
+    subtype: html
+  run_once: true
+  delegate_to: localhost
+
+...

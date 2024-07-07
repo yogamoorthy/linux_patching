@@ -1,0 +1,7 @@
+[wms_stage_ora_demo]
+test-oracle-tf1 ansible_host=10.200.85.175 ansible_ssh_user=ansible
+test-oracle-tf2 ansible_host=10.200.85.176 ansible_ssh_user=ansible
+
+[gk_stage_ora_demo]
+test-oracle-tf1 ansible_host=10.200.85.175 ansible_ssh_user=ansible
+test-oracle-tf2 ansible_host=10.200.85.176 ansible_ssh_user=ansible

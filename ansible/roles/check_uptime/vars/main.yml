@@ -1,0 +1,27 @@
+---
+# vars file for check_uptime
+
+#  dump_dir: /home/yagamoorthy_s/dumps/local_dump/
+
+ #email settings
+email_subject: Monthly Linux Host Report
+email_host: smtp.hy-vee.com
+email_from: root@localhost
+email_to: yagamoorthy.s@hy-vee.com,hemant.shanu@hy-vee.com,priyanka.banerjee@Hy-Vee.com,somashekar.bg@hy-vee.com
+ 
+#random settings
+csv_path: /tmp
+csv_filename: report.csv
+headers: Hostname,Ip Address,Kernel Version,Last Rebooted,Uptime,UptimeInSeconds,Last Update
+uptimedays: 90
+
+linux_commands:
+  debian_command: ls -lt --time-style=long-iso /var/log/apt/history.log | head -n 1 | awk "{print \$6, \$7}"
+  redhat_command: ls -lt --time-style=long-iso /var/log/yum.log | head -n 1 | awk "{print \$6, \$7}"
+  suse_command: ls -lt --time-style=long-iso /var/log/zypp/history | head -n 1 | awk "{print \$6, \$7}"
+
+
+# #random settings
+#     csv_path: /tmp
+#     csv_filename: report.csv
+#     headers: Hostname,Distro Ver,Kernel Ver,Last Rebooted,Uptime Report

@@ -1,0 +1,136 @@
+---
+env: che_prod_db
+dynamic_ip_list: "{{ groups['wms_che_prod_db_blue'] | map('extract', hostvars,  ['ansible_all_ipv4_addresses']) | join(',') }}"
+group_hostnames: "{{ groups['wms_che_prod_db_blue'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+group_fqdn: "{{ groups['wms_che_prod_db_blue'] | map('extract', hostvars, ['ansible_fqdn']) | join(',') }}"
+
+scan_name: chedb1-scan1
+asm_member1: ['chedb1a-v', 'chedb1a-v-vip']
+asm_member2: ['chedb1b-v', 'chedb1b-v-vip']
+asm_system_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  30373231366634313636363932326637353734363331663835356231313633653134313363626632
+  6634393339633662343331313031636637616133366438320a623331343265643730366232623061
+  32623834363533333062613634366461313932333933303261393165653133656134633161326131
+  3534366165626463610a653165623465393064393334666237353561303461626565353663356334
+  3532
+
+dlun_diskgroup: "ORCL:{{ data_disks.dlun1.name }},ORCL:{{ data_disks.dlun2.name }},ORCL:{{ data_disks.dlun3.name }}"
+
+#[NOTE: scsi controllers you skip the 7th socket]
+data_disks:
+  dlun1:
+    primary_partition: True
+    device: /dev/sdf
+    name: CHEDBDLUN1
+    id: 0
+  dlun2:
+    primary_partition: True
+    device: /dev/sdg
+    name: CHEDBDLUN2
+    id: 1
+  dlun3:
+    primary_partition: True
+    device: /dev/sdh
+    name: CHEDBDLUN3
+    id: 2
+  flun1:
+    primary_partition: True
+    device: /dev/sdi
+    name: CHEDBFLUN1
+    id: 3
+  flun2:
+    primary_partition: True
+    device: /dev/sdj
+    name: CHEDBFLUN2
+    id: 4
+  flun3:
+    primary_partition: True
+    device: /dev/sdk
+    name: CHEDBFLUN3
+    id: 5
+  quorum1:
+    primary_partition: True
+    device: /dev/sdl
+    name: CHEDBQUORUM1
+    id: 6
+  quorum2:
+    primary_partition: True
+    device: /dev/sdm
+    name: CHEDBQUORUM2
+    id: 8
+  quorum3:
+    primary_partition: True
+    device: /dev/sdn
+    name: CHEDBQUORUM3
+    id: 9
+
+application_disks:
+  # Expand Disks for RHEL_Template image
+  #  - (This section is not needed for rhel72-template image)
+  # sda3-tmp:
+  #   device: /dev/sda
+  #   pvs: /dev/sda2,/dev/sda3
+  #   vg: rhel
+  #   lv: tmp
+  #   mapper_path: /dev/mapper/rhel-tmp
+  #   mounted_path: /tmp
+  #   size: 10G
+  #   number: 3
+  #   primary_partition: False
+  sda3-swap:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: swap
+    mapper_path: /dev/mapper/rhel-swap
+    mounted_path: swap
+    mounted_state: present
+    number: 3
+    size: 21G
+    fstype: swap
+    primary_partition: False
+  sda3-root:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: root
+    mapper_path: /dev/mapper/rhel-root
+    mounted_path: /
+    number: 3
+    resizefs: True
+    primary_partition: False
+  sdb:
+    device: /dev/sdb
+    pvs: /dev/sdb1
+    vg: oracle
+    lv: u01
+    mapper_path: /dev/mapper/oracle-u01
+    mounted_path: /u01
+    primary_partition: True
+  sdc:
+    device: /dev/sdc
+    pvs: /dev/sdc1
+    vg: dbvisit
+    lv: vol01
+    mapper_path: /dev/mapper/dbvisit-vol01
+    mounted_path: /usr/dbvisit
+    primary_partition: True
+  sdd:
+    device: /dev/sdd
+    pvs: /dev/sdd1
+    vg: oraclebackups
+    lv: vol01
+    mapper_path: /dev/mapper/oraclebackups-vol01
+    mounted_path: /oracle/backups
+    primary_partition: True
+  # This is a tmp disk to store the large data dump of the database
+  sde:
+    device: /dev/sde
+    pvs: /dev/sde1
+    vg: dbvisit_tmp
+    lv: vol02
+    mapper_path: /dev/mapper/dbvisit_tmp-vol02
+    mounted_path: /usr/dbvisit_tmp
+    primary_partition: True
+...

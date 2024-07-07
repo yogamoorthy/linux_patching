@@ -1,0 +1,274 @@
+#---
+# Atlassian Environment
+#---
+[confluence_prod]
+corpconflu1-v
+corpconflu2-v
+conflunfs1-v
+
+[confluence_prod_app]
+corpconflu1-v
+corpconflu2-v
+
+[jira_prod]
+corpjira1-v ansible_host=192.168.34.174 ansible_ssh_user=sysadmin
+#corpjira2-v soon to be decommed
+jiranfs1-v  ansible_host=192.168.34.175 ansible_ssh_user=sysadmin
+
+[jira_prod_app]
+corpjira1-v
+#corpjira2-v soon to be decommed
+
+#---
+# WMS Environment
+#---
+[wms_che_prod_app]
+cheapp1a-v ansible_ssh_user=sysadmin
+cheapp1b-v ansible_ssh_user=sysadmin
+
+[wms_che_prod_db_blue]
+chedb1a-v ansible_host=10.200.85.184 ansible_ssh_user=sysadmin
+chedb1b-v ansible_host=10.200.85.185 ansible_ssh_user=sysadmin
+
+[wms_che_prod_db_dr]
+chedb1c-v ansible_host=10.200.85.102 ansible_ssh_user=sysadmin
+
+[wms_che_prod_all:children]
+wms_che_prod_app
+wms_che_prod_db
+
+[wms_chr_prod_app]
+chrapp1a-v ansible_ssh_user=sysadmin
+chrapp1b-v ansible_ssh_user=sysadmin
+
+[wms_chr_prod_db]
+chrdb1a ansible_ssh_user=sysadmin
+chrdb1b ansible_ssh_user=sysadmin
+
+[wms_chr_prod_db_blue]
+chrdb1a-v ansible_host=10.200.85.191 ansible_ssh_user=sysadmin
+chrdb1b-v ansible_host=10.200.85.192 ansible_ssh_user=sysadmin
+
+[wms_chr_prod_db_dr]
+chrdb1c-v ansible_host=10.200.85.104 ansible_ssh_user=sysadmin
+
+[wms_chr_prod_all:children]
+wms_chr_prod_app
+wms_chr_prod_db
+
+[wms_lmr_prod_app]
+lmrapp1a-v ansible_ssh_user=sysadmin
+lmrapp1b-v ansible_ssh_user=sysadmin
+
+[wms_lmr_prod_db]
+lmrdb2a-v ansible_ssh_user=sysadmin
+lmrdb2b-v ansible_ssh_user=sysadmin
+
+[wms_lmr_prod_db_dr]
+lmrdb2c-v ansible_ssh_user=sysadmin
+
+[wms_lmr_prod_all:children]
+wms_lmr_prod_app
+wms_lmr_prod_db
+wms_lmr_prod_db_blue
+wms_lmr_prod_db_dr
+
+[wms_pdi_prod_app]
+pdiapp1a-v ansible_ssh_user=sysadmin
+pdiapp1b-v ansible_ssh_user=sysadmin
+
+[wms_pdi_prod_db_blue]
+pdidb1a-v ansible_host=10.200.85.198 ansible_ssh_user=sysadmin
+pdidb1b-v ansible_host=10.200.85.199 ansible_ssh_user=sysadmin
+
+[wms_pdi_prod_db_dr]
+pdidb1c-v ansible_host=10.200.85.103 ansible_ssh_user=sysadmin
+
+[wms_pdi_prod_all:children]
+wms_pdi_prod_app
+wms_pdi_prod_db
+
+[wms_ctl_prod_app]
+ctlapp1a-v ansible_ssh_user=sysadmin
+ctlapp1b-v ansible_ssh_user=sysadmin
+
+[wms_ctl_prod_db]
+ctldb2a-v ansible_ssh_user=sysadmin
+ctldb2b-v ansible_ssh_user=sysadmin
+
+[wms_ctl_prod_db_dr]
+ctldb2c-v ansible_host=10.200.85.112 ansible_ssh_user=sysadmin
+
+[wms_ctl_prod_all:children]
+wms_ctl_prod_app
+wms_ctl_prod_db
+wms_ctl_prod_db_blue
+wms_ctl_prod_db_dr
+
+[wms_ldc_prod_app]
+ldcapp1a-v ansible_ssh_user=sysadmin
+ldcapp1b-v ansible_ssh_user=sysadmin
+
+[wms_ldc_prod_db]
+ldcdb1a-v ansible_ssh_user=sysadmin
+ldcdb1b-v ansible_ssh_user=sysadmin
+
+[wms_ldc_prod_db_dr]
+ldcdb1c-v ansible_host=10.134.64.114 ansible_ssh_user=sysadmin
+
+[wms_ldc_prod_all:children]
+wms_ldc_prod_app
+wms_ldc_prod_db
+wms_ldc_prod_db_dr
+
+[wms_sci_prod_app]
+scicognos1-v ansible_ssh_user=sysadmin
+
+[wms_sci_prod_all:children]
+wms_sci_prod_app
+
+[wms_mif_prod_app]
+rhelmif1a-v ansible_ssh_user=sysadmin
+rhelmif1b-v ansible_ssh_user=sysadmin
+
+
+[wms_mif_prod_all:children]
+wms_mif_prod_app
+
+[wms_prod_app_all:children]
+wms_che_prod_app
+wms_chr_prod_app
+wms_lmr_prod_app
+wms_sci_prod_app
+wms_mif_prod_app
+wms_pdi_prod_app
+wms_ctl_prod_app
+wms_ldc_prod_app
+
+[wms_prod_db_all:children]
+wms_che_prod_db
+wms_chr_prod_db
+wms_lmr_prod_db
+wms_mif_prod_db
+wms_pdi_prod_db
+wms_ctl_prod_db
+wms_ldc_prod_db
+
+[wms_prod_all:children]
+wms_che_prod_all
+wms_chr_prod_all
+wms_lmr_prod_all
+wms_sci_prod_all
+wms_mif_prod_all
+wms_pdi_prod_all
+wms_ctl_prod_all
+wms_prod_db_mgmt
+wms_ldc_prod_all
+
+#---
+# GK Environment
+#---
+[gk_prod_app_mgr]
+gkprodmgr1-v ansible_host=10.134.2.70
+
+[gk_prod_app_sdc]
+gkprodsdc1-v ansible_host=10.134.2.71
+gkprodsdc2-v ansible_host=10.134.2.72
+gkprodsdc3-v ansible_host=10.134.2.81
+gkprodsdc4-v ansible_host=10.134.2.82
+gkprodsdc5-v ansible_host=10.134.2.85
+
+[gk_prod_app_pos]
+gkprodpos1-v ansible_host=10.134.2.73
+gkprodpos2-v ansible_host=10.134.2.74
+gkprodpos3-v ansible_host=10.134.2.83
+gkprodpos4-v ansible_host=10.134.2.84
+gkprodpos5-v ansible_host=10.134.2.86
+
+[gk_prod_app_cis]
+
+[gk_prod_app_csrv]
+gkprodcsrv1-v ansible_host=10.134.2.76
+
+[gk_prod_web_pos]
+gkprodwebpos1-v ansible_host=10.134.252.35
+gkprodwebpos2-v ansible_host=10.134.252.36
+
+[gk_prod_db]
+gkproddb1a-v ansible_host=10.134.2.194
+gkproddb1b-v ansible_host=10.134.2.195
+
+[gk_prod_db_blue]
+gkproddb2a-v ansible_host=10.134.2.202
+gkproddb2b-v ansible_host=10.134.2.203
+
+#---
+# Openshift Environment
+#---
+[openshfit_prod_masters]
+prod-openshift-master-0 ansible_host=10.134.16.66 ansible_ssh_user=sysadmin
+prod-openshift-master-1 ansible_host=10.134.16.67 ansible_ssh_user=sysadmin
+prod-openshift-master-2 ansible_host=10.134.16.68 ansible_ssh_user=sysadmin
+
+[openshift_prod_compute]
+prod-openshift-compute-0 ansible_host=10.134.17.2 ansible_ssh_user=sysadmin
+prod-openshift-compute-1 ansible_host=10.134.17.3 ansible_ssh_user=sysadmin
+prod-openshift-compute-2 ansible_host=10.134.17.4 ansible_ssh_user=sysadmin
+prod-openshift-compute-3 ansible_host=10.134.17.5 ansible_ssh_user=sysadmin
+prod-openshift-compute-4 ansible_host=10.134.17.6 ansible_ssh_user=sysadmin
+
+[openshift_prod_infra]
+prod-openshift-infa-0 ansible_host=10.134.17.50 ansible_ssh_user=sysadmin
+prod-openshift-infa-1 ansible_host=10.134.17.51 ansible_ssh_user=sysadmin
+prod-openshift-infa-2 ansible_host=10.134.17.52 ansible_ssh_user=sysadmin
+
+[openshfit_prod_etcd]
+prod-openshift-etcd-0 ansible_host=10.134.16.98 ansible_ssh_user=sysadmin
+prod-openshift-etcd-1 ansible_host=10.134.16.99 ansible_ssh_user=sysadmin
+prod-openshift-etcd-2 ansible_host=10.134.16.100 ansible_ssh_user=sysadmin
+
+#---
+# Openshift PCI Environment
+#---
+[openshfit_pci_prod_masters]
+prod-pci-openshift-master-0 ansible_host=10.224.2.66 ansible_ssh_user=sysadmin
+prod-pci-openshift-master-1 ansible_host=10.224.2.67 ansible_ssh_user=sysadmin
+prod-pci-openshift-master-2 ansible_host=10.224.2.68 ansible_ssh_user=sysadmin
+
+[openshift_pci_prod_compute]
+prod-pci-openshift-compute-0 ansible_host=10.224.3.2 ansible_ssh_user=sysadmin
+prod-pci-openshift-compute-1 ansible_host=10.224.3.3 ansible_ssh_user=sysadmin
+prod-pci-openshift-compute-2 ansible_host=10.224.3.4 ansible_ssh_user=sysadmin
+
+[openshift_pci_prod_infra]
+prod-pci-openshift-infa-0 ansible_host=10.224.3.5 ansible_ssh_user=sysadmin
+prod-pci-openshift-infa-1 ansible_host=10.224.3.6 ansible_ssh_user=sysadmin
+prod-pci-openshift-infa-2 ansible_host=10.224.3.7 ansible_ssh_user=sysadmin
+
+[openshfit_pci_prod_etcd]
+prod-pci-openshift-etcd-0 ansible_host=10.224.2.98 ansible_ssh_user=sysadmin
+prod-pci-openshift-etcd-1 ansible_host=10.224.2.99 ansible_ssh_user=sysadmin
+prod-pci-openshift-etcd-2 ansible_host=10.224.2.100 ansible_ssh_user=sysadmin
+
+#---
+# Splunk Environment
+#---
+[splunk_prod]
+#WDM Deployment servers
+plwdmspkdpl1.Hy-Vee.net ansible_host=10.134.23.130
+plwdmspkdpl2.Hy-Vee.net ansible_host=10.134.23.131
+plwdmspkdpl3.Hy-Vee.net ansible_host=10.134.23.132
+#CHA Deployment servers
+plchaspkdpl1.Hy-Vee.net ansible_host=10.134.23.145
+plchaspkdpl2.Hy-Vee.net ansible_host=10.134.23.146
+plchaspkdpl3.Hy-Vee.net ansible_host=10.134.23.147
+#WDM Heavy Forwarder servers
+plwdmspkhvf1.Hy-Vee.net ansible_host=10.134.23.98
+plwdmspkhvf2.Hy-Vee.net ansible_host=10.134.23.99
+plwdmspkhvf3.Hy-Vee.net ansible_host=10.134.23.100
+plwdmspkhvf4.Hy-Vee.net ansible_host=10.134.23.101
+#CHA Heavy Forwarder servers
+plchaspkhvf1.Hy-Vee.net ansible_host=10.134.23.110
+plchaspkhvf2.Hy-Vee.net ansible_host=10.134.23.111
+plchaspkhvf3.Hy-Vee.net ansible_host=10.134.23.112
+plchaspkhvf4.Hy-Vee.net ansible_host=10.134.23.113

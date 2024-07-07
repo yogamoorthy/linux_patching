@@ -1,0 +1,119 @@
+---
+env: lmr_dev_db
+dynamic_ip_list: "{{ groups['wms_lmr_dev_db_blue'] | map('extract', hostvars,  ['ansible_all_ipv4_addresses']) | join(',') }}"
+group_hostnames: "{{ groups['wms_lmr_dev_db_blue'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+group_fqdn: "{{ groups['wms_lmr_dev_db_blue'] | map('extract', hostvars, ['ansible_fqdn']) | join(',') }}"
+
+scan_name: lmrdevdb2-scan
+asm_member1: ['lmrdevdb2a-v', 'lmrdevdb2a-v-vip']
+asm_member2: ['lmrdevdb2b-v', 'lmrdevdb2b-v-vip']
+asm_system_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  61306337366239653535343765646463326233636637333330306164323362396238646532356263
+  6264303238616230616232316465646336393033336430640a353637363238656630333035303164
+  62386131386634613761373564326137663766636439643766313739363733653038383165373565
+  3361393339336230620a313861616237346363383037623465333565393131306238623836393332
+  6433
+
+data_disks:
+  dlun1:
+    primary_partition: True
+    device: /dev/sde
+    name: LMRDBDLUN1
+    id: 0
+  dlun2:
+    primary_partition: True
+    device: /dev/sdf
+    name: LMRDBDLUN2
+    id: 1
+  flun1:
+    primary_partition: True
+    device: /dev/sdg
+    name: LMRDBFLUN1
+    id: 2
+  flun2:
+    primary_partition: True
+    device: /dev/sdh
+    name: LMRDBFLUN2
+    id: 3
+  flun3:
+    primary_partition: True
+    device: /dev/sdi
+    name: LMRDBFLUN3
+    id: 4
+  quorum1:
+    primary_partition: True
+    device: /dev/sdj
+    name: LMRDBQUORUM1
+    id: 5
+  quorum2:
+    primary_partition: True
+    device: /dev/sdk
+    name: LMRDBQUORUM2
+    id: 6
+  quorum3:
+    primary_partition: True
+    device: /dev/sdl
+    name: LMRDBQUORUM3
+    id: 8
+
+application_disks:
+  # Expand Disks for RHEL_Template image
+  #  - (This section is not needed for rhel72-template image)
+  # sda3-tmp:
+  #   device: /dev/sda
+  #   pvs: /dev/sda2,/dev/sda3
+  #   vg: rhel
+  #   lv: tmp
+  #   mapper_path: /dev/mapper/rhel-tmp
+  #   mounted_path: /tmp
+  #   size: 10G
+  #   number: 3
+  #   primary_partition: False
+  sda3-swap:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: swap
+    mapper_path: /dev/mapper/rhel-swap
+    mounted_path: swap
+    mounted_state: present
+    number: 3
+    size: 21G
+    fstype: swap
+    primary_partition: False
+  sda3-root:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: root
+    mapper_path: /dev/mapper/rhel-root
+    mounted_path: /
+    number: 3
+    resizefs: True
+    primary_partition: False
+  sdb:
+    device: /dev/sdb
+    pvs: /dev/sdb1
+    vg: oracle
+    lv: u01
+    mapper_path: /dev/mapper/oracle-u01
+    mounted_path: /u01
+    primary_partition: True
+  sdc:
+    device: /dev/sdc
+    pvs: /dev/sdc1
+    vg: dbvisit
+    lv: vol01
+    mapper_path: /dev/mapper/dbvisit-vol01
+    mounted_path: /usr/dbvisit
+    primary_partition: True
+  sdd:
+    device: /dev/sdd
+    pvs: /dev/sdd1
+    vg: oraclebackups
+    lv: vol01
+    mapper_path: /dev/mapper/oraclebackups-vol01
+    mounted_path: /oracle/backups
+    primary_partition: True
+...

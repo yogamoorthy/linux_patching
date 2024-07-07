@@ -1,0 +1,25 @@
+---
+# Do not remove. Must gather facts before running any other roles.
+- hosts: gk_prod_app_pos
+  gather_facts: false
+
+- hosts: gk_prod_app_pos
+  gather_facts: true
+  serial: 1
+  roles:
+    - { role: ../roles/stop_services }
+  vars: 
+    main_app:
+      # - nagios
+      # - splunk
+      # - tomcat
+      # - jira
+      # - confluence
+      # - smserver 
+      # - smufs 
+      # - activemq 
+      # - smhybridinfoserver
+      - tomcat
+  become: yes
+  become_user: root 
+... 

@@ -1,0 +1,10 @@
+---
+# Do not remove. Must gather facts before running any other roles.
+- hosts: hy-vee
+  gather_facts: false
+  
+- hosts: hy-vee
+  gather_facts: true
+  roles:
+    - { role: ../roles/pre_checks }
+...

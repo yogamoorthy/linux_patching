@@ -1,0 +1,24 @@
+[Nagios]
+# gkprodmgr1-v
+# gkprodcsrv1-v
+# gkprodwebpos1-v
+# gkprodwebpos2-v
+# gkprodsdc1-v
+# gkprodsdc2-v
+# gkprodsdc3-v
+# gkprodsdc4-v
+# gkprodsdc5-v
+# gkprodpos1-v
+# gkprodpos2-v
+# gkprodpos3-v
+# gkprodpos4-v
+# gkprodpos5-v
+
+conflutest-v  ansible_host=192.168.34.60 ansible_ssh_user=sysadmin
+conflutest2-v ansible_host=192.168.34.61 ansible_ssh_user=sysadmin
+conflutestnfs-v  ansible_host=192.168.34.59 ansible_ssh_user=sysadmin
+jiratest1-v   ansible_host=192.168.34.100 ansible_ssh_user=sysadmin
+#jiratest2-v
+jiratestnfs1-v ansible_host=192.168.34.104 ansible_ssh_user=sysadmin
+
+

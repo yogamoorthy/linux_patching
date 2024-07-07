@@ -1,0 +1,5 @@
+---
+- name: Execute Ping
+  import_tasks: ping.yml
+  when: ping_toggle == True
+...

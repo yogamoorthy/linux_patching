@@ -1,0 +1,14 @@
+---
+# Ansible Central Inventory
+galaxy_info:
+  author: 
+    - William Vanderlip-Mclean
+  description: Central Inventory for ansible
+  license: MIT
+  platforms:
+    - name: RedHat
+    - name: CentOS
+    - name: SUSE
+  categories:
+    - system
+...

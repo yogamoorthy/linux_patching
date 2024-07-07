@@ -1,0 +1,5 @@
+---
+# vars file for check_uptime
+
+dump_dir: /home/ansible/find_cmd_out
+

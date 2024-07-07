@@ -1,0 +1,21 @@
+---
+group_hostnames: "{{ groups['wms_che_dev_app'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+admin_user: scopeadm
+pri_svc_url: chedevapp1a-v
+sec_svc_url: chedevapp1b-v
+
+mip_name: mip
+mda_name: mda
+wm_name: wms2015
+lm_name: "null"
+db_name: dbdev
+
+wm_db_servicename: chewmdev
+wm_db_schemaname: che2015wmdev
+wm_db_pass: "U2FsdGVkX1/QN3ic1hSvZaAvb0VZGFo5fLByhvRd5xw="
+wm_db_salt: 0aac7d1afe37429494277e2fc12b69f5
+wm_env: "Cherokee Dev"
+
+vocollect_port:
+vocollect_endpoint_id:
+...

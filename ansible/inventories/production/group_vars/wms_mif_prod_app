@@ -1,0 +1,6 @@
+---
+group_hostnames: "{{ groups['wms_mif_prod_app'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+admin_user: scopeadm
+pri_svc_url: 
+sec_svc_url: 
+...

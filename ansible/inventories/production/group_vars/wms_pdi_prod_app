@@ -1,0 +1,24 @@
+---
+group_hostnames: "{{ groups['wms_pdi_prod_app'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+admin_user: scopeadm
+pri_svc_url: pdiapp1a-v
+sec_svc_url: pdiapp1b-v
+
+mip_name: mipprod
+mda_name: mdaprod
+wm_name: wmsprod
+lm_name: lmbatchprod
+db_name: dbprod
+
+manh_home: "/manh/apps/scope"
+
+wm_db_username: nagios
+wm_db_servicename: pdiwmpr1
+wm_db_schemaname: pdiwm
+wm_db_pass: "U2FsdGVkX1/QN3ic1hSvZaAvb0VZGFo5fLByhvRd5xw="
+wm_db_salt: 0aac7d1afe37429494277e2fc12b69f5
+wm_env: "PDI Prod"
+
+vocollect_port: 23500
+vocollect_endpoint_id: 42
+...

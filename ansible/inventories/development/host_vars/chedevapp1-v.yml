@@ -1,0 +1,32 @@
+---
+# Universal Service vars
+manh_base: "/manh/scope"
+java_home: "/usr/lib/jvm/java"
+
+
+# MIP Service Vars
+mip_sd_tools_dir: "/mmc-workspace/sd2-tools"
+mip_install_dir: "/mip"
+
+# MDA Service Vars
+mda_sd_tools_dir: "/mmc-workspace_2015/sd2-tools"
+mda_install_dir: "/mda"
+mda_jbossTxObjectDir: "/profile-root/mda_dev/data/tx-object-store"
+
+# WM Service vars
+wm_sd_tools_dir: "/mmc-workspace_2017/sd2-tools"
+wm_install_dir: "/wms2015"
+wm_jbossTxObjectDir: "/profile-root/wm_dev/data/tx-object-store"
+
+# LM Service vars
+lm_sd_tools_dir: "/mmc-workspace_2017/sd2-tools"
+lm_install_dir: "/lm"
+lm_jbossTxObjectDir: "/profile-root/lm_dev/data/tx-object-store"
+
+# DB Service vars
+db_sd_tools_dir: "//mmc-workspace_2015/sd2-tools"
+db_install_dir: "/db"
+db_jbossTxObjectDir: "/profile-root/db_dev/data/tx-object-store"
+
+partner_node: 
+...

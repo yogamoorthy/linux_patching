@@ -1,0 +1,4 @@
+---
+- name: Test ping
+  ansible.builtin.ping:
+...

@@ -1,0 +1,97 @@
+---
+env: stage_ora_demo
+dynamic_ip_list: "{{ groups['wms_stage_ora_demo'] | map('extract', hostvars,  ['ansible_all_ipv4_addresses']) | join(',') }}"
+group_hostnames: "{{ groups['wms_stage_ora_demo'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+group_fqdn: "{{ groups['wms_stage_ora_demo'] | map('extract', hostvars, ['ansible_fqdn']) | join(',') }}"
+
+scan_name: demo-scan
+asm_member1: ['test-oracle-tf1', 'test-oracle-tf1-vip']
+asm_member2: ['test-oracle-tf2', 'test-oracle-tf2-vip']
+asm_system_password: !vault |
+    $ANSIBLE_VAULT;1.1;AES256
+    66646465346662323938383339613863383138393738336166636639613164363732326464326132
+    3763316631336262386165336563373765363333306263620a383266663835343735663662646534
+    33323937376539346362363334643562383232383363383361303734633936373265663663366565
+    6137303137353831320a613666656534626366366165613364313237643133666362306231356561
+    32343035633664613661343464613466646636363238306664613762336230643666
+
+dlun_diskgroup: "/dev/oracleasm/disks/{{ data_disks.dlun1.name }},/dev/oracleasm/disks/{{ data_disks.dlun2.name }}"
+flun_diskgroup: "/dev/oracleasm/disks/{{ data_disks.flun1.name }},/dev/oracleasm/disks/{{ data_disks.flun2.name }},/dev/oracleasm/disks/{{ data_disks.flun3.name }}"
+quorum_diskgroup: "/dev/oracleasm/disks/{{ data_disks.quorum1.name }},/dev/oracleasm/disks/{{ data_disks.quorum2.name }},/dev/oracleasm/disks/{{ data_disks.quorum3.name }}"
+llun_diskgroup: "/dev/oracleasm/disks/{{ data_disks.llun1.name }}"
+
+#[NOTE: scsi controllers you skip the 7th socket]
+data_disks:
+  dlun1:
+    primary_partition: True
+    device: /dev/sde
+    name:  DEMODLUN1
+    id: 0
+  dlun2:
+    primary_partition: True
+    device: /dev/sdf
+    name: DEMOBDLUN2
+    id: 1
+  flun1:
+    primary_partition: True
+    device: /dev/sdg
+    name: DEMOBFLUN1
+    id: 2
+  flun2:
+    primary_partition: True
+    device: /dev/sdh
+    name: DEMOBFLUN2
+    id: 3
+  flun3:
+    primary_partition: True
+    device: /dev/sdi
+    name: DEMOBFLUN3
+    id: 4
+  quorum1:
+    primary_partition: True
+    device: /dev/sdj
+    name: DEMOBQUORUM1
+    id: 5
+  quorum2:
+    primary_partition: True
+    device: /dev/sdk
+    name: DEMOBQUORUM2
+    id: 6
+  quorum3:
+    primary_partition: True
+    device: /dev/sdl
+    name: DEMOBQUORUM3
+    id: 8
+  llun1:
+    primary_partition: True
+    device: /dev/sdm
+    name: DEMODBLLUN1
+    id: 0
+    controller: 02:03
+ 
+application_disks:
+  sdb:
+    device: /dev/sdb
+    pvs: /dev/sdb1
+    vg: oracle
+    lv: vol01
+    mapper_path: /dev/mapper/oracle-vol01
+    mounted_path: /u01
+    primary_partition: True
+  sdc:
+    device: /dev/sdc
+    pvs: /dev/sdc1
+    vg: dbvisit
+    lv: vol01
+    mapper_path: /dev/mapper/dbvisit-vol01
+    mounted_path: /usr/dbvisit
+    primary_partition: True
+  sdd:
+    device: /dev/sdd
+    pvs: /dev/sdd1
+    vg: oraclebackups
+    lv: vol01
+    mapper_path: /dev/mapper/oraclebackups-vol01
+    mounted_path: /oracle/backups
+    primary_partition: True
+...

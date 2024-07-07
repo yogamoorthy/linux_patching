@@ -1,0 +1,9 @@
+---
+- src: ssh://git@github.hy-vee.cloud/ansible/downtime.git
+  scm: git
+  version: master
+
+- src: ssh://git@github.hy-vee.cloud/ansible/ping.git
+  scm: git
+  version: master
+...

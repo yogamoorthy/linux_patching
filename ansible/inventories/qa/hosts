@@ -1,0 +1,33 @@
+#---
+# GK Inventory
+#---
+[gk_qa_app_mgr]
+gkqamgr1-v ansible_host=10.134.1.70
+
+[gk_qa_app_sdc]
+gkqasdc1-v ansible_host=10.134.1.71
+gkqasdc2-v ansible_host=10.134.1.72
+gkqasdc3-v ansible_host=10.134.1.81
+
+[gk_qa_app_pos]
+gkqapos1-v ansible_host=10.134.1.73
+gkqapos2-v ansible_host=10.134.1.74
+gkqapos3-v ansible_host=10.134.1.83
+
+[gk_qa_app_cis]
+
+[gk_qa_app_csrv]
+gkqacsrv1-v ansible_host=10.134.1.76
+
+[gk_qa_web_pos]
+gkqawebpos1-v ansible_host=10.134.252.31
+gkqawebpos2-v ansible_host=10.134.252.32
+
+[gk_qa_db]
+gkqadb1a-v ansible_host=10.134.1.194
+gkqadb1b-v ansible_host=10.134.1.195
+gkqadb1c-v ansible_host=10.134.1.200
+
+[gk_qa_db_blue]
+gkqadb2a-v ansible_host=10.134.1.201
+gkqadb2b-v ansible_host=10.134.1.202

@@ -1,0 +1,93 @@
+---
+environment: dev
+env: gk_dev
+dynamic_ip_list: "{{ groups['gk_dev_db_blue'] | map('extract', hostvars,  ['ansible_all_ipv4_addresses']) | join(',') }}"
+group_hostnames: "{{ groups['gk_dev_db_blue'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+group_fqdn: "{{ groups['gk_dev_db_blue'] | map('extract', hostvars, ['ansible_fqdn']) | join(',') }}"
+
+scan_name: gkdevdb1-scan1
+asm_member1: ['gkdevdb2a-v', 'gkdevdb2a-v-vip']
+asm_member2: ['gkdevdb2b-v', 'gkdevdb2b-v-vip']
+asm_system_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  65313262653932653636663966373565393637623131613062636162313734343730383966313735
+  3763313930613138636335633938666264396431616433310a333366613734656561643862343166
+  30643565663333353032666330396565363131323839303934636139616661656331303265383234
+  3934363065383262390a623937613964323035396131623561626634386564626137663135373531
+  38613566363032323736383065643266623538313263396433656634653162373730
+
+dlun_diskgroup: "/dev/oracleasm/disks/{{ data_disks.dlun1.name }},/dev/oracleasm/disks/{{ data_disks.dlun2.name }}"
+flun_diskgroup: "/dev/oracleasm/disks/{{ data_disks.flun1.name }},/dev/oracleasm/disks/{{ data_disks.flun2.name }}"
+quorum_diskgroup: "/dev/oracleasm/disks/{{ data_disks.quorum1.name }},/dev/oracleasm/disks/{{ data_disks.quorum2.name }},/dev/oracleasm/disks/{{ data_disks.quorum3.name }}"
+llun_diskgroup: "/dev/oracleasm/disks/{{ data_disks.llun1.name }}"
+
+#[NOTE: scsi controllers you skip the 7th socket]
+data_disks:
+  dlun1:
+    primary_partition: True
+    device: /dev/sde
+    name: GKDEVDBDLUN1
+    id: 0
+  dlun2:
+    primary_partition: True
+    device: /dev/sdf
+    name: GKDEVDBDLUN2
+    id: 1
+  flun1:
+    primary_partition: True
+    device: /dev/sdg
+    name: GKDEVDBFLUN1
+    id: 2
+  flun2:
+    primary_partition: True
+    device: /dev/sdh
+    name: GKDEVDBFLUN2
+    id: 3
+  quorum1:
+    primary_partition: True
+    device: /dev/sdi
+    name: GKDEVDBQUORUM1
+    id: 4
+  quorum2:
+    primary_partition: True
+    device: /dev/sdj
+    name: GKDEVDBQUORUM2
+    id: 5
+  quorum3:
+    primary_partition: True
+    device: /dev/sdk
+    name: GKDEVDBQUORUM3
+    id: 6
+  llun1:
+    primary_partition: True 
+    device: /dev/sdl
+    name: GKDEVDBLLUN1
+    id: 8
+ 
+#TODO: Suse OS disk structure is going to change
+application_disks:
+  sdb:
+    device: /dev/sdb
+    pvs: /dev/sdb1
+    vg: oracle
+    lv: u01
+    mapper_path: /dev/mapper/oracle-u01
+    mounted_path: /u01
+    primary_partition: True
+  sdc:
+    device: /dev/sdc
+    pvs: /dev/sdc1
+    vg: dbvisit
+    lv: vol01
+    mapper_path: /dev/mapper/dbvisit-vol01
+    mounted_path: /usr/dbvisit
+    primary_partition: True
+  sdd:
+    device: /dev/sdd
+    pvs: /dev/sdd1
+    vg: oraclebackups
+    lv: vol01
+    mapper_path: /dev/mapper/oraclebackups-vol01
+    mounted_path: /oracle/backups
+    primary_partition: True
+...

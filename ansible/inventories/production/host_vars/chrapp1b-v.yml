@@ -1,0 +1,11 @@
+---
+partner_node: "chrapp1a-v"
+nagios_pac_event_id: '20000'
+# GRO
+gro_db_name: db
+# HBC
+hbc_db_name: db
+# PER
+per_db_name: db
+env_override: "per/"
+...

@@ -1,0 +1,774 @@
+#---
+# Atlassian Environment
+#---
+[confluence_dev]
+conflutest-v  ansible_host=192.168.34.60 ansible_ssh_user=sysadmin
+conflutest2-v ansible_host=192.168.34.61 ansible_ssh_user=sysadmin
+conflutestnfs-v  ansible_host=192.168.34.59 ansible_ssh_user=sysadmin
+
+[hy-vee]
+#GK Environment
+; gkprodmgr1-v
+; gkprodsdc1-v 
+; gkprodsdc2-v 
+; gkprodsdc3-v
+; gkprodsdc4-v 
+; gkprodsdc5-v 
+; gkprodpos1-v 
+; gkprodpos2-v 
+; gkprodpos3-v 
+; gkprodpos4-v 
+; gkprodcsrv1-v
+; gkprodwebpos1-v 
+; gkprodwebpos2-v
+; ; gkproddb1a-v 
+; ; gkproddb1b-v 
+; gkproddb2a-v 
+; gkproddb2b-v 
+; gkproddb1d-v
+; gkdevmgr1-v
+; gkdevsdc1-v
+; gkdevsdc2-v
+; gkdevpos1-v
+; gkdevpos2-v
+; gkdevcsrv1-v
+; gkdevwebpos1-v
+; gkdevwebpos2-v
+; gkdevdb2a-v
+; gkdevdb2b-v
+; gkqamgr1-v
+; gkqasdc1-v
+; gkqasdc2-v
+; gkqasdc3-v
+; gkqapos1-v
+; gkqapos2-v
+; gkqapos3-v
+; gkqacsrv1-v
+; gkqawebpos1-v
+; gkqawebpos2-v
+; gkqadb2a-v
+; gkqadb2b-v
+; gkqadb1c-v
+; ; #WMS Environment
+; cheapp1a-v 
+; cheapp1b-v
+; chedb1a-v 
+; chedb1b-v 
+; chedb1c-v
+; chrapp1a-v 
+; chrapp1b-v
+; chrdb1a-v
+; chrdb1b-v
+; 172.16.1.52
+; 172.16.1.12
+; 10.200.85.251  ansible_host=10.200.85.251 ansible_ssh_user=sysadmin
+; 10.136.66.3
+; 192.168.126.18
+; chrdb1c-v
+; lmrapp1a-v
+; lmrapp1b-v
+; lmrdb2a-v
+; lmrdb2b-v
+; pdiapp1a-v 
+; pdiapp1b-v 
+; pdidb1a-v
+; pdidb1b-v
+; pdidb1c-v
+; ctlapp1a-v
+; ctlapp1b-v
+; ctldb2a-v
+; ctldb2b-v
+; ctldb2c-v
+; ldcapp1a-v
+; ldcapp1b-v
+; ldcdb1c-v
+; scicognos1-v
+; rhelmif1a-v
+; rhelmif1b-v
+; chedevapp1-v
+; chedevdb1-v
+; chrdevapp1-v
+; chrdevdb1-v
+; lmrdevapp1a-v
+; lmrdevapp1b-v
+; lmrdevdb2a-v
+; lmrdevdb2b-v
+; pdidevapp1-v
+; devdb1-v
+; ctldevapp1a-v
+; ctldevapp1b-v
+; ctldevdb2a-v
+; ctldevdb2b-v
+; ldcdevapp1a-v
+; ldcdevapp1b-v 
+; ldcdevdb1a-v 
+; ldcdevdb1b-v
+; pdidevsci-v
+; pdidevapp1-v
+; lmscheduler1-v
+; mmc2017-v
+; plwdmpdinfs1
+; pdi-centos01
+; pdi-stor2rrd
+#Confluence & Jira
+; corpcrowd1-v ansible_host=10.200.64.120 ansible_ssh_user=sysadmin
+; plcrowd1 ansible_host=10.134.64.214 ansible_ssh_user=sysadmin
+; corpconflu1-v
+; corpconflu2-v
+; conflunfs1-v
+; corpconflu1-v
+; corpconflu2-v
+; conflunfs1-v
+; corpjira1-v
+; jiranfs1-v
+; corpjira1-v
+; jiranfs1-v
+; dlwdmatlcrd1
+; dlwdmatlcrd2
+; crowdtest1-v
+; conflutest-v
+; conflutest2-v
+; conflutestnfs-v
+; jiratest1-v
+; jiratestnfs1-v
+; jiratest1-v
+; jiratestnfs1-v
+; #Splunk
+; plwdmspkdpl1
+; plwdmspkdpl2
+; plwdmspkdpl3
+; plchaspkdpl1
+; plchaspkdpl2
+; plchaspkdpl3
+; plwdmspkhvf1
+; plwdmspkhvf2
+; plwdmspkhvf3
+; plwdmspkhvf4
+; plchaspkhvf1
+; plchaspkhvf2
+; plchaspkhvf3
+; plchaspkhvf4
+; dlwdmspkdpl1
+; dlchaspkdpl1
+; dlwdmspkhvf1
+; dlchaspkhvf1
+; #Security
+; axonious ansible_host=10.134.8.186 ansible_ssh_user=sysadmin
+; axonious2 ansible_host=10.134.8.189 ansible_ssh_user=sysadmin
+; plwdmr7app1
+; plwdmr7sapp1 ansible_host=10.134.8.50 ansible_ssh_user=sysadmin
+; plwdmr7sapp2 ansible_host=10.134.8.51 ansible_ssh_user=sysadmin
+; r7corpse1-v
+; r7corpse2-v
+; plwdmr7sapp1
+; plwdmr7sapp2
+; r7corpse1-v
+; r7corpse2-v
+; r7mhbdmz
+; r7amberwebse-v
+; plwdmr7app1
+#nagios
+; nagiosprod1-v  ansible_host=10.200.64.141 ansible_ssh_user=sysadmin
+; plwdmnagfus01
+; nagiosdev1-v ansible_host=10.200.64.140 ansible_ssh_user=sysadmin
+; 8855nagios
+; 3635Nagios
+#AMBPLNagiosCore1
+7538nagios
+7570nagios
+1216nagios
+10.136.66.10
+
+#Nagios
+; 7592Nagios.hy-vee.net
+; 7591Nagios.hy-vee.net
+; 7590Nagios.hy-vee.net
+; 7588Nagios.hy-vee.net
+; 7587Nagios.hy-vee.net
+; 7584Nagios.hy-vee.net
+; 7583Nagios.hy-vee.net
+; 7582Nagios.hy-vee.net
+; 7580Nagios.hy-vee.net
+; 7571Nagios.hy-vee.net
+; 7570Nagios.hy-vee.net
+; 7560Nagios.hy-vee.net
+; 7550Nagios.hy-vee.net
+; 7540Nagios.hy-vee.net
+; 7538Nagios.hy-vee.net
+; 7535Nagios.hy-vee.net
+; 7531Nagios.hy-vee.net
+; 7530Nagios.hy-vee.net
+; 7520Nagios.hy-vee.net
+; 7505Nagios.hy-vee.net
+; 7095Nagios.hy-vee.net
+; 7090Nagios.hy-vee.net
+; 7082Nagios.hy-vee.net
+; 7079Nagios.hy-vee.net
+; 7078Nagios.hy-vee.net
+; 7077Nagios.hy-vee.net
+; 7075Nagios.hy-vee.net
+; 7072Nagios.hy-vee.net
+; 7070Nagios.hy-vee.net
+; 7069Nagios.hy-vee.net
+; 7068Nagios.hy-vee.net
+; 7065Nagios.hy-vee.net
+; 7062Nagios.hy-vee.net
+; 7060Nagios.hy-vee.net
+; 7056Nagios.hy-vee.net
+; 7046Nagios.hy-vee.net
+; 7042Nagios.hy-vee.net
+; 7036Nagios.hy-vee.net
+; 7031Nagios.hy-vee.net
+; 7026Nagios.hy-vee.net
+; 7025Nagios.hy-vee.net
+; 7020Nagios.hy-vee.net
+; 7019Nagios.hy-vee.net
+; 5895Nagios.hy-vee.net
+; 5398Nagios.hy-vee.net
+; 5377Nagios.hy-vee.net
+; 5159Nagios.hy-vee.net
+; 4860Nagios.hy-vee.net
+; 4534Nagios.hy-vee.net
+; 4392Nagios.hy-vee.net
+; 4247Nagios.hy-vee.net
+; 4241Nagios.hy-vee.net
+; 4215Nagios.hy-vee.net
+; 4192Nagios.hy-vee.net
+; 4138Nagios.hy-vee.net
+; 4124Nagios.hy-vee.net
+; 4106Nagios.hy-vee.net
+; 4016Nagios.hy-vee.net
+; 3635Nagios.hy-vee.net
+; 3634Nagios.hy-vee.net
+; 3633Nagios.hy-vee.net
+; 3628Nagios.hy-vee.net
+; 3527Nagios.hy-vee.net
+; 3504Nagios.hy-vee.net
+; 3434Nagios.hy-vee.net
+; 3389Nagios.hy-vee.net
+; 3376Nagios.hy-vee.net
+; 3235Nagios.hy-vee.net
+; 3191Nagios.hy-vee.net
+; 3083Nagios.hy-vee.net
+; 3068Nagios.hy-vee.net
+; 3062Nagios.hy-vee.net
+; 3061Nagios.hy-vee.net
+; 3060Nagios.hy-vee.net
+; 3042Nagios.hy-vee.net
+; 3036Nagios.hy-vee.net
+; 3028Nagios.hy-vee.net
+; 3022Nagios.hy-vee.net
+; 3007Nagios.hy-vee.net
+; 1904Nagios.hy-vee.net
+; 1899Nagios.hy-vee.net
+; 1898Nagios.hy-vee.net
+; 1897Nagios.hy-vee.net
+; 1896Nagios.hy-vee.net
+; 1895Nagios.hy-vee.net
+; 1894Nagios.hy-vee.net
+; 1892Nagios.hy-vee.net
+; 1890Nagios.hy-vee.net
+; 1889Nagios.hy-vee.net
+; 1888Nagios.hy-vee.net
+; 1887Nagios.hy-vee.net
+; 1875Nagios.hy-vee.net
+; 1874Nagios.hy-vee.net
+; 1873Nagios.hy-vee.net
+; 1872Nagios.hy-vee.net
+; 1871Nagios.hy-vee.net
+; 1869Nagios.hy-vee.net
+; 1866Nagios.hy-vee.net
+; 1863Nagios.hy-vee.net
+; 1860Nagios.hy-vee.net
+; 1850Nagios.hy-vee.net
+; 1845Nagios.hy-vee.net
+; 1825Nagios.hy-vee.net
+; 1820Nagios.hy-vee.net
+; 1759Nagios.hy-vee.net
+; 1689Nagios.hy-vee.net
+; 1667Nagios.hy-vee.net
+; 1658Nagios.hy-vee.net
+; 1655Nagios.hy-vee.net
+; 1650Nagios.hy-vee.net
+; 1644Nagios.hy-vee.net
+; 1643Nagios.hy-vee.net
+; 1642Nagios.hy-vee.net
+; 1641Nagios.hy-vee.net
+; 1640Nagios.hy-vee.net
+; 1638Nagios.hy-vee.net
+; 1637Nagios.hy-vee.net
+; 1636Nagios.hy-vee.net
+; 1634Nagios.hy-vee.net
+; 1633Nagios.hy-vee.net
+; 1632Nagios.hy-vee.net
+; 1631Nagios.hy-vee.net
+; 1628Nagios.hy-vee.net
+; 1624Nagios.hy-vee.net
+; 1622Nagios.hy-vee.net
+; 1620Nagios.hy-vee.net
+; 1619Nagios.hy-vee.net
+; 1615Nagios.hy-vee.net
+; 1614Nagios.hy-vee.net
+; 1610Nagios.hy-vee.net
+; 1600Nagios.hy-vee.net
+; 1573Nagios.hy-vee.net
+; 1562Nagios.hy-vee.net
+; 1560Nagios.hy-vee.net
+; 1559Nagios.hy-vee.net
+; 1556Nagios.hy-vee.net
+; 1555Nagios.hy-vee.net
+; 1552Nagios.hy-vee.net
+; 1549Nagios.hy-vee.net
+; 1548Nagios.hy-vee.net
+; 1547Nagios.hy-vee.net
+; 1545Nagios.hy-vee.net
+; 1544Nagios.hy-vee.net
+; 1542Nagios.hy-vee.net
+; 1535Nagios.hy-vee.net
+; 1534Nagios.hy-vee.net
+; 1533Nagios.hy-vee.net
+; 1532Nagios.hy-vee.net
+; 1531Nagios.hy-vee.net
+; 1530Nagios.hy-vee.net
+; 1527Nagios.hy-vee.net
+; 1525Nagios.hy-vee.net
+; 1522Nagios.hy-vee.net
+; 1520Nagios.hy-vee.net
+; 1519Nagios.hy-vee.net
+; 1516Nagios.hy-vee.net
+; 1514Nagios.hy-vee.net
+; 1511Nagios.hy-vee.net
+; 1509Nagios.hy-vee.net
+; 1508Nagios.hy-vee.net
+; 1505Nagios.hy-vee.net
+; 1504Nagios.hy-vee.net
+; 1482Nagios.hy-vee.net
+; 1481Nagios.hy-vee.net
+; 1480Nagios.hy-vee.net
+; 1478Nagios.hy-vee.net
+; 1475Nagios.hy-vee.net
+; 1474Nagios.hy-vee.net
+; 1473Nagios.hy-vee.net
+; 1472Nagios.hy-vee.net
+; 1471Nagios.hy-vee.net
+; 1470Nagios.hy-vee.net
+; 1469Nagios.hy-vee.net
+; 1467Nagios.hy-vee.net
+; 1466Nagios.hy-vee.net
+; 1465Nagios.hy-vee.net
+; 1464Nagios.hy-vee.net
+; 1463Nagios.hy-vee.net
+; 1462Nagios.hy-vee.net
+; 1461Nagios.hy-vee.net
+; 1460Nagios.hy-vee.net
+; 1459Nagios.hy-vee.net
+; 1458Nagios.hy-vee.net
+; 1449Nagios.hy-vee.net
+; 1442Nagios.hy-vee.net
+; 1441Nagios.hy-vee.net
+; 1440Nagios.hy-vee.net
+; 1439Nagios.hy-vee.net
+; 1438Nagios.hy-vee.net
+; 1437Nagios.hy-vee.net
+; 1433Nagios.hy-vee.net
+; 1428Nagios.hy-vee.net
+; 1422Nagios.hy-vee.net
+; 1420Nagios.hy-vee.net
+; 1417Nagios.hy-vee.net
+; 1416Nagios.hy-vee.net
+; 1415Nagios.hy-vee.net
+; 1413Nagios.hy-vee.net
+; 1410Nagios.hy-vee.net
+; 1407Nagios.hy-vee.net
+; 1406Nagios.hy-vee.net
+; 1404Nagios.hy-vee.net
+; 1403Nagios.hy-vee.net
+; 1402Nagios.hy-vee.net
+; 1401Nagios.hy-vee.net
+; 1400Nagios.hy-vee.net
+; 1398Nagios.hy-vee.net
+; 1396Nagios.hy-vee.net
+; 1394Nagios.hy-vee.net
+; 1393Nagios.hy-vee.net
+; 1392Nagios.hy-vee.net
+; 1391Nagios.hy-vee.net
+; 1390Nagios.hy-vee.net
+; 1389Nagios.hy-vee.net
+; 1388Nagios.hy-vee.net
+; 1387Nagios.hy-vee.net
+; 1386Nagios.hy-vee.net
+; 1385Nagios.hy-vee.net
+; 1384Nagios.hy-vee.net
+; 1383Nagios.hy-vee.net
+; 1382Nagios.hy-vee.net
+; 1381Nagios.hy-vee.net
+; 1380Nagios.hy-vee.net
+; 1379Nagios.hy-vee.net
+; 1377Nagios.hy-vee.net
+; 1376Nagios.hy-vee.net
+; 1375Nagios.hy-vee.net
+; 1356Nagios.hy-vee.net
+; 1355Nagios.hy-vee.net
+; 1353Nagios.hy-vee.net
+; 1335Nagios.hy-vee.net
+; 1324Nagios.hy-vee.net
+; 1323Nagios.hy-vee.net
+; 1322Nagios.hy-vee.net
+; 1321Nagios.hy-vee.net
+; 1320Nagios.hy-vee.net
+; 1318Nagios.hy-vee.net
+; 1303Nagios.hy-vee.net
+; 1298Nagios.hy-vee.net
+; 1297Nagios.hy-vee.net
+; 1296Nagios.hy-vee.net
+; 1295Nagios.hy-vee.net
+; 1288Nagios.hy-vee.net
+; 1285Nagios.hy-vee.net
+; 1281Nagios.hy-vee.net
+; 1271Nagios.hy-vee.net
+; 1262Nagios.hy-vee.net
+; 1261Nagios.hy-vee.net
+; 1260Nagios.hy-vee.net
+; 1247Nagios.hy-vee.net
+; 1245Nagios.hy-vee.net
+; 1243Nagios.hy-vee.net
+; 1241Nagios.hy-vee.net
+; 1239Nagios.hy-vee.net
+; 1235Nagios.hy-vee.net
+; 1227Nagios.hy-vee.net
+; 1224Nagios.hy-vee.net
+; 1223Nagios.hy-vee.net
+; 1221Nagios.hy-vee.net
+; 1220Nagios.hy-vee.net
+; 1219Nagios.hy-vee.net
+; 1218Nagios.hy-vee.net
+; 1217Nagios.hy-vee.net
+; 1216Nagios.hy-vee.net
+; 1215Nagios.hy-vee.net
+; 1202Nagios.hy-vee.net
+; 1192Nagios.hy-vee.net
+; 1190Nagios.hy-vee.net
+; 1185Nagios.hy-vee.net
+; 1184Nagios.hy-vee.net
+; 1183Nagios.hy-vee.net
+; 1181Nagios.hy-vee.net
+; 1180Nagios.hy-vee.net
+; 1177Nagios.hy-vee.net
+; 1170Nagios.hy-vee.net
+; 1167Nagios.hy-vee.net
+; 1166Nagios.hy-vee.net
+; 1165Nagios.hy-vee.net
+; 1163Nagios.hy-vee.net
+; 1162Nagios.hy-vee.net
+; 1161Nagios.hy-vee.net
+; 1160Nagios.hy-vee.net
+; 1159Nagios.hy-vee.net
+; 1155Nagios.hy-vee.net
+; 1151Nagios.hy-vee.net
+; 1148Nagios.hy-vee.net
+; 1142Nagios.hy-vee.net
+; 1138Nagios.hy-vee.net
+; 1136Nagios.hy-vee.net
+; 1124Nagios.hy-vee.net
+; 1120Nagios.hy-vee.net
+; 1109Nagios.hy-vee.net
+; 1108Nagios.hy-vee.net
+; 1107Nagios.hy-vee.net
+; 1106Nagios.hy-vee.net
+; 1105Nagios.hy-vee.net
+; 1101Nagios.hy-vee.net
+; 1095Nagios.hy-vee.net
+; 1094Nagios.hy-vee.net
+; 1092Nagios.hy-vee.net
+; 1090Nagios.hy-vee.net
+; 1089Nagios.hy-vee.net
+; 1085Nagios.hy-vee.net
+; 1083Nagios.hy-vee.net
+; 1082Nagios.hy-vee.net
+; 1081Nagios.hy-vee.net
+; 1080Nagios.hy-vee.net
+; 1078Nagios.hy-vee.net
+; 1077Nagios.hy-vee.net
+; 1076Nagios.hy-vee.net
+; 1075Nagios.hy-vee.net
+; 1074Nagios.hy-vee.net
+; 1071Nagios.hy-vee.net
+; 1068Nagios.hy-vee.net
+; 1065Nagios.hy-vee.net
+; 1064Nagios.hy-vee.net
+; 1063Nagios.hy-vee.net
+; 1061Nagios.hy-vee.net
+; 1060Nagios.hy-vee.net
+; 1058Nagios.hy-vee.net
+; 1056Nagios.hy-vee.net
+; 1054Nagios.hy-vee.net
+; 1052Nagios.hy-vee.net
+; 1051Nagios.hy-vee.net
+; 1047Nagios.hy-vee.net
+; 1044Nagios.hy-vee.net
+; 1042Nagios.hy-vee.net
+; 1040Nagios.hy-vee.net
+; 1039Nagios.hy-vee.net
+; 1038Nagios.hy-vee.net
+; 1037Nagios.hy-vee.net
+; 1036Nagios.hy-vee.net
+; 1035Nagios.hy-vee.net
+; 1034Nagios.hy-vee.net
+; 1033Nagios.hy-vee.net
+; 1030Nagios.hy-vee.net
+; 1027Nagios.hy-vee.net
+; 1026Nagios.hy-vee.net
+; 1025Nagios.hy-vee.net
+; 1023Nagios.hy-vee.net
+; 1022Nagios.hy-vee.net
+; 1019Nagios.hy-vee.net
+; 1018Nagios.hy-vee.net
+; 1013Nagios.hy-vee.net
+; 1011Nagios.hy-vee.net
+; 1010Nagios.hy-vee.net
+; 1009Nagios.hy-vee.net
+; 1007Nagios.hy-vee.net
+#Managed By Linux Host
+; ansible
+; plsatellite1 ansible_host=10.134.64.16 ansible_ssh_user=sysadmin
+; virtwho1-v nsible_host=10.200.64.70 ansible_ssh_user=sysadmin
+; smt1-v ansible_host=10.200.65.72 ansible_ssh_user=sysadmin
+; plwdmgraphite1
+; #DB Management Hosts
+; occ1-v  ansible_host=10.134.10.2 ansible_ssh_user=sysadmin
+; plwdmwmsdbv1 ansible_host=10.134.10.3 ansible_ssh_user=sysadmin
+; #ORDER PROCESSING ENVIRONMENT
+; scjobsprod-v
+; scjobsdev-v
+; scjobsqa-v
+; plwdmsaeapp1
+; 10.200.85.251 ansible_host=10.200.85.251 ansible_ssh_user=sysadmin
+; 172.16.1.12
+; 192.168.126.18 ansible_host=192.168.126.18 ansible_ssh_user=sysadmin
+
+
+[confluence_dev_app]
+conflutest-v
+conflutest2-v
+
+[jira_dev]
+jiratest1-v   ansible_host=192.168.34.100 ansible_ssh_user=sysadmin
+jiratestnfs1-v ansible_host=192.168.34.104 ansible_ssh_user=sysadmin
+
+[jira_dev_app]
+jiratest1-v
+jiratest2-v
+
+#---
+# WMS Environment
+#---
+[wms_che_dev_app]
+chedevapp1-v
+
+[wms_che_dev_db]
+chedevdb1-v
+
+[wms_che_dev_all:children]
+wms_che_dev_app
+wms_che_dev_db
+
+[wms_chr_dev_app]
+chrdevapp1-v
+
+[wms_chr_dev_db]
+chrdevdb1-v
+
+[wms_chr_dev_all:children]
+wms_chr_dev_app
+wms_chr_dev_db
+
+[wms_lmr_dev_app]
+lmrdevapp1a-v
+lmrdevapp1b-v
+
+[wms_lmr_dev_db]
+lmrdevdb2a-v ansible_host=10.200.85.206
+lmrdevdb2b-v ansible_host=10.200.85.207
+
+[wms_lmr_dev_all:children]
+wms_lmr_dev_app
+wms_lmr_dev_db
+
+[wms_pdi_dev_app]
+pdidevapp1-v
+pdidevapp2-v
+
+[wms_pdi_dev_db]
+devdb1-v
+
+[wms_pdi_dev_all:children]
+wms_pdi_dev_app
+wms_pdi_dev_db
+
+[wms_ctl_dev_app]
+ctldevapp1a-v
+ctldevapp1b-v
+
+[wms_ctl_dev_db]
+ctldevdb2a-v
+ctldevdb2b-v
+
+[wms_ctl_dev_all:children]
+wms_ctl_dev_app
+wms_ctl_dev_db
+
+[wms_ldc_dev_app]
+ldcdevapp1a-v ansible_ssh_user=sysadmin
+ldcdevapp1b-v ansible_ssh_user=sysadmin
+
+[wms_ldc_dev_db]
+ldcdevdb1a-v ansible_ssh_user=sysadmin
+ldcdevdb1b-v ansible_ssh_user=sysadmin
+
+[wms_ldc_dev_all:children]
+wms_ldc_dev_app
+wms_ldc_dev_db
+
+[wms_sci_dev_app]
+pdidevsci-v ansible_host=10.200.85.87
+
+[wms_sci_dev_all:children]
+wms_sci_dev_app
+
+[wms_mif_dev_app]
+pdidevapp1-v
+
+[wms_mif_dev_all:children]
+wms_mif_dev_app
+
+[wms_dev_app_all:children]
+wms_che_dev_app
+wms_chr_dev_app
+wms_lmr_dev_app
+wms_pdi_dev_app
+wms_ctl_dev_app
+wms_ldc_dev_app
+wms_sci_dev_app
+wms_mif_dev_app
+
+[wms_dev_db_all:children]
+wms_pdi_dev_db
+wms_che_dev_db
+wms_chr_dev_db
+wms_lmr_dev_db
+wms_ctl_dev_db
+wms_ldc_dev_db
+
+[wms_dev_all:children]
+wms_che_dev_all
+wms_chr_dev_all
+wms_lmr_dev_all
+wms_pdi_dev_all
+wms_ctl_dev_all
+wms_ldc_dev_all
+wms_sci_dev_all
+wms_mif_dev_all
+
+
+#---
+# Atlassian Environment
+#---
+[crowd_dev]
+dlwdmatlcrd1 ansible_host=10.200.66.14
+dlwdmatlcrd2
+crowdtest1-v
+
+[jira_dev]
+jiratest1-v
+jiratestnfs1-v
+
+[confluence_dev]
+conflutest-v
+conflutest2-v
+conflutestnfs-v
+
+#---
+# GK Environment
+#---
+[gk_dev_app_mgr]
+gkdevmgr1-v ansible_host=10.134.0.70
+
+[gk_dev_app_sdc]
+gkdevsdc1-v ansible_host=10.134.0.71
+gkdevsdc2-v ansible_host=10.134.0.72
+
+[gk_dev_app_pos]
+gkdevpos1-v ansible_host=10.134.0.73
+gkdevpos2-v ansible_host=10.134.0.74
+
+[gk_dev_app_csrv]
+gkdevcsrv1-v ansible_host=10.134.0.76
+
+[gk_dev_web_pos]
+gkdevwebpos1-v ansible_host=10.134.252.33
+gkdevwebpos2-v ansible_host=10.134.252.34
+
+[gk_dev_db]
+gkdevdb1a-v ansible_host=10.134.0.194
+gkdevdb1b-v ansible_host=10.134.0.195
+
+[gk_dev_db_blue]
+gkdevdb2a-v ansible_host=10.134.0.201
+gkdevdb2b-v ansible_host=10.134.0.202
+
+#---
+# Openshift Environment
+#---
+[openshfit_dev_masters]
+dev-openshift-master-0 ansible_host=10.134.14.66 ansible_ssh_user=sysadmin
+dev-openshift-master-1 ansible_host=10.134.14.67 ansible_ssh_user=sysadmin
+dev-openshift-master-2 ansible_host=10.134.14.68 ansible_ssh_user=sysadmin
+
+[openshift_dev_compute]
+dev-openshift-compute-0 ansible_host=10.134.15.2 ansible_ssh_user=sysadmin
+dev-openshift-compute-1 ansible_host=10.134.15.3 ansible_ssh_user=sysadmin
+dev-openshift-compute-2 ansible_host=10.134.15.4 ansible_ssh_user=sysadmin
+dev-openshift-compute-3 ansible_host=10.134.15.5 ansible_ssh_user=sysadmin
+dev-openshift-compute-4 ansible_host=10.134.15.6 ansible_ssh_user=sysadmin
+
+[openshift_dev_infra]
+dev-openshift-infa-0 ansible_host=10.134.15.50 ansible_ssh_user=sysadmin
+dev-openshift-infa-1 ansible_host=10.134.15.51 ansible_ssh_user=sysadmin
+dev-openshift-infa-2 ansible_host=10.134.15.52 ansible_ssh_user=sysadmin
+
+[openshfit_dev_etcd]
+dev-openshift-etcd-0 ansible_host=10.134.14.98 ansible_ssh_user=sysadmin
+dev-openshift-etcd-1 ansible_host=10.134.14.99 ansible_ssh_user=sysadmin
+dev-openshift-etcd-2 ansible_host=10.134.14.100 ansible_ssh_user=sysadmin
+
+#---
+# Openshift PCI Environment
+#---
+[openshfit_pci_dev_masters]
+dev-pci-openshift-master-0 ansible_host=10.224.0.66 ansible_ssh_user=sysadmin
+dev-pci-openshift-master-1 ansible_host=10.224.0.67 ansible_ssh_user=sysadmin
+dev-pci-openshift-master-2 ansible_host=10.224.0.68 ansible_ssh_user=sysadmin
+
+[openshift_pci_dev_compute]
+dev-pci-openshift-compute-0 ansible_host=10.224.1.2 ansible_ssh_user=sysadmin
+dev-pci-openshift-compute-1 ansible_host=10.224.1.3 ansible_ssh_user=sysadmin
+dev-pci-openshift-compute-2 ansible_host=10.224.1.4 ansible_ssh_user=sysadmin
+
+[openshift_pci_dev_infra]
+dev-pci-openshift-infa-0 ansible_host=10.224.1.5 ansible_ssh_user=sysadmin
+dev-pci-openshift-infa-1 ansible_host=10.224.1.6 ansible_ssh_user=sysadmin
+dev-pci-openshift-infa-2 ansible_host=10.224.1.7 ansible_ssh_user=sysadmin
+
+[openshfit_pci_dev_etcd]
+dev-pci-openshift-etcd-0 ansible_host=10.224.0.98 ansible_ssh_user=sysadmin
+dev-pci-openshift-etcd-1 ansible_host=10.224.0.99 ansible_ssh_user=sysadmin
+dev-pci-openshift-etcd-2 ansible_host=10.224.0.100 ansible_ssh_user=sysadmin
+
+#---
+# Splunk Environment
+#---
+[splunk_dev]
+dlwdmspkdpl1 ansible_host=10.134.23.178
+dlchaspkdpl1 ansible_host=10.134.23.179
+dlwdmspkhvf1 ansible_host=10.134.23.164
+dlchaspkhvf1 ansible_host=10.134.23.165

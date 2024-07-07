@@ -1,0 +1,4 @@
+---
+- name: import Stop services tasks
+  import_tasks: stop_service.yml
+...

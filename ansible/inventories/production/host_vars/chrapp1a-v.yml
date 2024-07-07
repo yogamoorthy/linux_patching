@@ -1,0 +1,6 @@
+---
+partner_node: "chrapp1b-v"
+nagios_pac_event_id: '20000'
+# PER
+env_override: "per_"
+...

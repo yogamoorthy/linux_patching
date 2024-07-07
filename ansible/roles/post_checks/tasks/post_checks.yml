@@ -1,0 +1,42 @@
+---
+
+######################################### The below task will be run on Linux Hosts  #############################################
+
+- name: Task 1 - checking service status
+  systemd:
+    name: "{{ item }}"
+  with_items: "{{ services }}"
+  register: SERV
+
+- name: Task 2 - Grab the uptime report
+  shell: uptime | cut -d ',' -f1
+  register: uptime
+  become: yes
+
+- name: Task 3 - To Build out CSV content
+  set_fact:
+    dev_info: "{{ ansible_hostname }},{{ ansible_default_ipv4.address }},{{ SERV.stdout }},{{ uptime.stdout }}"
+  become: yes
+
+########################## The below two task will be run in localhost  ##############################
+
+- name: Generate CSV file
+  template: 
+    src: templates/upgrade.txt.j2 
+    dest: "{{ csv_path }}/{{ csv_filename }}"
+  delegate_to: localhost
+
+- name: Send Email
+  mail:
+    host: "{{ email_host }}"
+    from: "{{ email_from }}"
+    port: 25
+    to: "{{ email_to }}"
+    subject: "[Ansible] *{{ email_subject }}*"
+    body: "{{ lookup('template', 'templates/report.html.j2', errors='ignore') }}"
+    attach: "{{ csv_path }}/{{ csv_filename }}"
+    subtype: html
+  run_once: true
+  delegate_to: localhost
+
+...

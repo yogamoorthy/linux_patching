@@ -1,0 +1,113 @@
+---
+environment: prod
+env: gk_prod
+dynamic_ip_list: "{{ groups['gk_prod_db_blue'] | map('extract', hostvars,  ['ansible_all_ipv4_addresses']) | join(',') }}"
+group_hostnames: "{{ groups['gk_prod_db_blue'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+group_fqdn: "{{ groups['gk_prod_db_blue'] | map('extract', hostvars, ['ansible_fqdn']) | join(',') }}"
+
+scan_name: gkproddb1-scan1
+asm_member1: ['gkproddb2a-v', 'gkproddb2a-v-vip']
+asm_member2: ['gkproddb2b-v', 'gkproddb2b-v-vip']
+asm_system_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  30343233313732306364373734366235613636666264633833376536623964616164663339366630
+  3439323335653862333263616464653634323335396662320a353837636663643664616465393136
+  65633335326437656333363963323833356432366332313432653436383133386332346533363331
+  3735646232653732390a376137326332623733633666383836356562343363353363383934383361
+  61363236646532343732666164356566353530666336633666366237356466616164
+
+dlun_diskgroup: "ORCL:{{ data_disks.dlun1.name }},ORCL:{{ data_disks.dlun2.name }}"
+
+
+#[NOTE: scsi controllers you skip the 7th socket]
+data_disks:
+  dlun1:
+    primary_partition: True
+    device: /dev/sde
+    name: GKPRODDLUN1
+    id: 0
+  dlun2:
+    primary_partition: True
+    device: /dev/sdf
+    name: GKPRODDLUN2
+    id: 1
+  flun1:
+    primary_partition: True
+    device: /dev/sdg
+    name: GKPRODFLUN1
+    id: 2
+  flun2:
+    primary_partition: True
+    device: /dev/sdh
+    name: GKPRODFLUN2
+    id: 3
+  flun3:
+    primary_partition: True
+    device: /dev/sdi
+    name: GKPRODFLUN3
+    id: 4
+  quorum1:
+    primary_partition: True
+    device: /dev/sdj
+    name: GKPRODQUORUM1
+    id: 5
+  quorum2:
+    primary_partition: True
+    device: /dev/sdk
+    name: GKPRODQUORUM2
+    id: 6
+  quorum3:
+    primary_partition: True
+    device: /dev/sdl
+    name: GKPRODQUORUM3
+    id: 8
+ 
+#TODO: Suse OS disk strucute is going to change
+application_disks:
+  sda3-swap:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: swap
+    mapper_path: /dev/mapper/rhel-swap
+    mounted_path: swap
+    mounted_state: present
+    number: 3
+    size: 21G
+    fstype: swap
+    primary_partition: False
+  sda3-root:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: root
+    mapper_path: /dev/mapper/rhel-root
+    mounted_path: /
+    number: 3
+    resizefs: True
+    primary_partition: False
+  sdb:
+    device: /dev/sdb
+    pvs: /dev/sdb1
+    vg: oracle
+    lv: u01
+    mapper_path: /dev/mapper/oracle-u01
+    mounted_path: /u01
+    primary_partition: True
+  sdc:
+    device: /dev/sdc
+    pvs: /dev/sdc1
+    vg: dbvisit
+    lv: vol01
+    mapper_path: /dev/mapper/dbvisit-vol01
+    mounted_path: /usr/dbvisit
+    primary_partition: True
+  sdd:
+    device: /dev/sdd
+    pvs: /dev/sdd1
+    vg: oraclebackups
+    lv: vol01
+    mapper_path: /dev/mapper/oraclebackups-vol01
+    mounted_path: /oracle/backups
+    primary_partition: True
+...

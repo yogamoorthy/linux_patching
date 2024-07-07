@@ -1,0 +1,4 @@
+---
+tomcat_min_memory: 24576
+tomcat_max_memory: 24576
+...

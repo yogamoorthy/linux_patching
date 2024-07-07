@@ -1,0 +1,112 @@
+---
+env: ctl_prod_db
+dynamic_ip_list: "{{ groups['wms_ctl_prod_db_blue'] | map('extract', hostvars,  ['ansible_all_ipv4_addresses']) | join(',') }}"
+group_hostnames: "{{ groups['wms_ctl_prod_db_blue'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+group_fqdn: "{{ groups['wms_ctl_prod_db_blue'] | map('extract', hostvars, ['ansible_fqdn']) | join(',') }}"
+
+scan_name: ctldb1-scan1
+asm_member1: ['ctldb2a-v', 'ctldb2a-v-vip']
+asm_member2: ['ctldb2b-v', 'ctldb2b-v-vip']
+asm_system_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  36656132303335346164643333303337393731623861316639623532303261653165626338306432
+  3739663965373230383437366438353361623633633161310a346435643430353333376532393366
+  63636361636262613966386361663032313430633637613030616437303033653761376334376265
+  3765323534623733310a366165363639386562363561393232633038343630626331323666356338
+  3634
+
+dlun_diskgroup: "ORCL:{{ data_disks.dlun1.name }},ORCL:{{ data_disks.dlun2.name }}"
+flun_diskgroup: "ORCL:{{ data_disks.flun1.name }},ORCL:{{ data_disks.flun2.name }},ORCL:{{ data_disks.flun3.name }}"
+quorum_diskgroup: "ORCL:{{ data_disks.quorum1.name }},ORCL:{{ data_disks.quorum2.name }},ORCL:{{ data_disks.quorum3.name }}"
+
+#[NOTE: scsi controllers you skip the 7th socket]
+data_disks:
+  dlun1:
+    primary_partition: True
+    device: /dev/sde
+    name: CTLDBDLUN1
+    id: 0
+  dlun2:
+    primary_partition: True
+    device: /dev/sdf
+    name: CTLDBDLUN2
+    id: 1
+  flun1:
+    primary_partition: True
+    device: /dev/sdg
+    name: CTLDBFLUN1
+    id: 2
+  flun2:
+    primary_partition: True
+    device: /dev/sdh
+    name: CTLDBFLUN2
+    id: 3
+  flun3:
+    primary_partition: True
+    device: /dev/sdi
+    name: CTLDBFLUN3
+    id: 4
+  quorum1:
+    primary_partition: True
+    device: /dev/sdj
+    name: CTLDBQUORUM1
+    id: 5
+  quorum2:
+    primary_partition: True
+    device: /dev/sdk
+    name: CTLDBQUORUM2
+    id: 6
+  quorum3:
+    primary_partition: True
+    device: /dev/sdl
+    name: CTLDBQUORUM3
+    id: 8
+ 
+application_disks:
+  sda3-swap:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: swap
+    mapper_path: /dev/mapper/rhel-swap
+    mounted_path: swap
+    mounted_state: present
+    number: 3
+    size: 21G
+    fstype: swap
+    primary_partition: False
+  sda3-root:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: root
+    mapper_path: /dev/mapper/rhel-root
+    mounted_path: /
+    number: 3
+    resizefs: True
+    primary_partition: False
+  sdb:
+    device: /dev/sdb
+    pvs: /dev/sdb1
+    vg: oracle
+    lv: u01
+    mapper_path: /dev/mapper/oracle-u01
+    mounted_path: /u01
+    primary_partition: True
+  sdc:
+    device: /dev/sdc
+    pvs: /dev/sdc1
+    vg: dbvisit
+    lv: vol01
+    mapper_path: /dev/mapper/dbvisit-vol01
+    mounted_path: /usr/dbvisit
+    primary_partition: True
+  sdd:
+    device: /dev/sdd
+    pvs: /dev/sdd1
+    vg: oraclebackups
+    lv: vol01
+    mapper_path: /dev/mapper/oraclebackups-vol01
+    mounted_path: /oracle/backups
+    primary_partition: True
+...

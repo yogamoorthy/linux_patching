@@ -1,0 +1,84 @@
+---
+env: pdi_prod_db_dr
+dynamic_ip_list: "{{ groups['wms_pdi_prod_db_dr'] | map('extract', hostvars,  ['ansible_all_ipv4_addresses']) | join(',') }}"
+group_hostnames: "{{ groups['wms_pdi_prod_db_dr'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+group_fqdn: "{{ groups['wms_pdi_prod_db_dr'] | map('extract', hostvars, ['ansible_fqdn']) | join(',') }}"
+
+#[NOTE: scsi controllers you skip the 7th socket]
+data_disks:
+  dlun1:
+    primary_partition: True
+    device: /dev/sdd
+    name: PDIDBDLUN1
+    id: 0
+  dlun2:
+    primary_partition: True
+    device: /dev/sde
+    name: PDIDBDLUN2
+    id: 1
+  dlun3:
+    primary_partition: True
+    device: /dev/sdf
+    name: PDIDBDLUN3
+    id: 2
+  dlun4:
+    primary_partition: True
+    device: /dev/sdg
+    name: PDIDBDLUN4
+    id: 3
+  flun1:
+    primary_partition: True
+    device: /dev/sdh
+    name: PDIDBFLUN1
+    id: 4
+  flun2:
+    primary_partition: True
+    device: /dev/sdi
+    name: PDIDBFLUN2
+    id: 5
+  flun3:
+    primary_partition: True
+    device: /dev/sdj
+    name: PDIDBFLUN3
+    id: 6
+
+application_disks:
+  sda3-swap:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: swap
+    mapper_path: /dev/mapper/rhel-swap
+    mounted_path: swap
+    mounted_state: present
+    number: 3
+    size: 21G
+    fstype: swap
+    primary_partition: False
+  sda3-root:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: root
+    mapper_path: /dev/mapper/rhel-root
+    mounted_path: /
+    number: 3
+    resizefs: True
+    primary_partition: False
+  sdb:
+    device: /dev/sdb
+    pvs: /dev/sdb1
+    vg: oracle
+    lv: u01
+    mapper_path: /dev/mapper/oracle-u01
+    mounted_path: /u01
+    primary_partition: True
+  sdc:
+    device: /dev/sdc
+    pvs: /dev/sdc1
+    vg: dbvisit
+    lv: vol01
+    mapper_path: /dev/mapper/dbvisit-vol01
+    mounted_path: /usr/dbvisit
+    primary_partition: True
+...

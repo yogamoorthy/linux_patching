@@ -1,0 +1,24 @@
+---
+# Do not remove. Must gather facts before running any other roles.
+
+- hosts: hy-vee
+  gather_facts: true
+
+# - hosts: hy-vee
+#   gather_facts: false
+#   vars:
+#     downtime_duration: 30
+#     comment: "Server restart"
+#   roles:
+#     - role: downtime
+
+# # This is the playbook template. Adjust to meet your needs.
+# - hosts: gkqamgr1-v
+#   gather_facts: false
+#   roles:
+#     - role: ping
+- hosts: hy-vee
+  gather_facts: false
+  roles:  
+    - role: check_uptime
+...

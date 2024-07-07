@@ -1,0 +1,111 @@
+---
+env: ldc_dev_db
+dynamic_ip_list: "{{ groups['wms_ldc_dev_db'] | map('extract', hostvars,  ['ansible_all_ipv4_addresses']) | join(',') }}"
+group_hostnames: "{{ groups['wms_ldc_dev_db'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+group_fqdn: "{{ groups['wms_ldc_dev_db'] | map('extract', hostvars, ['ansible_fqdn']) | join(',') }}"
+
+scan_name: ldcdevdb1-scan
+asm_member1: ['ldcdevdb1a-v', 'ldcdevdb1a-v-vip']
+asm_member2: ['ldcdevdb1b-v', 'ldcdevdb1b-v-vip']
+asm_system_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  61306337366239653535343765646463326233636637333330306164323362396238646532356263
+  6264303238616230616232316465646336393033336430640a353637363238656630333035303164
+  62386131386634613761373564326137663766636439643766313739363733653038383165373565
+  3361393339336230620a313861616237346363383037623465333565393131306238623836393332
+  6433
+
+dlun_diskgroup: "ORCL:{{ data_disks.dlun1.name }},ORCL:{{ data_disks.dlun2.name }}"
+flun_diskgroup: "ORCL:{{ data_disks.flun1.name }},ORCL:{{ data_disks.flun2.name }},ORCL:{{ data_disks.flun3.name }}"
+quorum_diskgroup: "ORCL:{{ data_disks.quorum1.name }},ORCL:{{ data_disks.quorum2.name }},ORCL:{{ data_disks.quorum3.name }}"
+
+data_disks:
+  dlun1:
+    primary_partition: True
+    device: /dev/sde
+    name: LDCDBDLUN1
+    id: 0
+  dlun2:
+    primary_partition: True
+    device: /dev/sdf
+    name: LDCDBDLUN2
+    id: 1
+  flun1:
+    primary_partition: True
+    device: /dev/sdg
+    name: LDCDBFLUN1
+    id: 2
+  flun2:
+    primary_partition: True
+    device: /dev/sdh
+    name: LDCDBFLUN2
+    id: 3
+  flun3:
+    primary_partition: True
+    device: /dev/sdi
+    name: LDCDBFLUN3
+    id: 4
+  quorum1:
+    primary_partition: True
+    device: /dev/sdj
+    name: LDCDBQUORUM1
+    id: 5
+  quorum2:
+    primary_partition: True
+    device: /dev/sdk
+    name: LDCDBQUORUM2
+    id: 6
+  quorum3:
+    primary_partition: True
+    device: /dev/sdl
+    name: LDCDBQUORUM3
+    id: 8
+
+application_disks:
+  sda3-swap:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: swap
+    mapper_path: /dev/mapper/rhel-swap
+    mounted_path: swap
+    mounted_state: present
+    number: 3
+    size: 21G
+    fstype: swap
+    primary_partition: False
+  sda3-root:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: root
+    mapper_path: /dev/mapper/rhel-root
+    mounted_path: /
+    number: 3
+    resizefs: True
+    primary_partition: False
+  sdb:
+    device: /dev/sdb
+    pvs: /dev/sdb1
+    vg: oracle
+    lv: u01
+    mapper_path: /dev/mapper/oracle-u01
+    mounted_path: /u01
+    primary_partition: True
+  sdc:
+    device: /dev/sdc
+    pvs: /dev/sdc1
+    vg: dbvisit
+    lv: vol01
+    mapper_path: /dev/mapper/dbvisit-vol01
+    mounted_path: /usr/dbvisit
+    primary_partition: True
+  sdd:
+    device: /dev/sdd
+    pvs: /dev/sdd1
+    vg: oraclebackups
+    lv: vol01
+    mapper_path: /dev/mapper/oraclebackups-vol01
+    mounted_path: /oracle/backups
+    primary_partition: True
+...

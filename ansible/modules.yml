@@ -1,0 +1,5 @@
+---
+- src: git@github.hy-vee.cloud:SystemsTeam/systems-ansible-modules.git
+  scm: git
+  version: master
+...

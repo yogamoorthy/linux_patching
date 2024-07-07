@@ -1,0 +1,19 @@
+---
+group_hostnames: "{{ groups['wms_pdi_dev_app'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+pri_svc_url: pdidevapp1-v
+sec_svc_url: pdidevapp2-v
+
+mip_name: mip
+mda_name: mda
+wm_name: wms
+lm_name: "null"
+db_name: dbdev
+
+wm_db_servicename: manhdb
+wm_db_schemaname: hyvewm2015dev
+wm_db_pass: "U2FsdGVkX1/QN3ic1hSvZaAvb0VZGFo5fLByhvRd5xw="
+wm_db_salt: 0aac7d1afe37429494277e2fc12b69f5
+wm_env: "PDI Dev"
+vocollect_port:
+vocollect_endpoint_id:
+...

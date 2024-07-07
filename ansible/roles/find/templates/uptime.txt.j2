@@ -1,0 +1,4 @@
+{{ headers }}
+{% for host in groups['Assets'] %}
+{{ hostvars[host]['dev_info'] }}
+{% endfor %}

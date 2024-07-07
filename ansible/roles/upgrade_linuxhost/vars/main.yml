@@ -1,0 +1,12 @@
+---
+
+#email settings
+email_subject: Upgrade report
+email_host: smtp.hy-vee.com
+email_from: root@localhost
+email_to: infralinux@hy-vee.com
+
+#random settings
+csv_path: /tmp
+csv_filename: upgrade_listhosts.csv
+headers: Hostname,Ip Address,Previous_Kernel_Versions,New_Kernel_Versions,Uptime,Upgrade_Status

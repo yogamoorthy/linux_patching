@@ -1,0 +1,55 @@
+#!/bin/bash
+
+if [ -d "./venv" ]; then
+  echo "Skipping pip install"
+  . ./venv/bin/activate
+else
+  echo "Starting pip install"
+  python3 -m venv ./venv
+  . ./venv/bin/activate
+  python3 -m pip install --upgrade pip
+  pip install -r requirements.txt
+fi
+
+if [ -d "./ansible/inventories" ]; then
+  echo "Skipping inventory clone"
+  # rm -fr ./ansible/inventories
+else
+  echo "Starting inventory clone"
+fi 
+
+if [ -d "./ansible/roles" ]; then
+  echo "Skipping galaxy role workspaces rebuild"
+  # rm -fr ./ansible/roles
+  # mkdir ./ansible/roles
+else
+  echo "Starting galaxy role workspaces creation"
+  mkdir ./ansible/roles
+fi
+
+if [ -d "./ansible/modules" ]; then
+  echo "Skipping galaxy module workspaces rebuild"
+  # rm -fr ./ansible/modules
+  # mkdir ./ansible/modules
+else
+  echo "Starting galaxy module workspaces creation"
+  mkdir ./ansible/modules
+fi
+
+ansible-galaxy install -r ./ansible/inventories.yml -p ./ansible
+ansible-galaxy install -r ./ansible/requirements.yml -p ./ansible/roles
+ansible-galaxy install -r ./ansible/modules.yml -p ./ansible/modules
+
+if vault token lookup --address=https://vault.prod.hy-vee.cloud &> /dev/null; then
+    echo "👌 Already logged into Vault, using existing token."
+else
+    echo "🔒 Logging into Vault..."
+    if err=$(vault login --method=oidc --path=okta --address=https://vault.prod.hy-vee.cloud 2>&1); then
+        echo "🔓 Success"
+    else
+        echo "🔒 ${err}"
+    fi
+fi
+
+ANSIBLE_VAULT_KEY=$(vault kv get --address=https://vault.prod.hy-vee.cloud -field=vault_key jenkins/systems/ansible)
+echo "${ANSIBLE_VAULT_KEY}" > ./ansible/etc/ansible_vault_key.txt

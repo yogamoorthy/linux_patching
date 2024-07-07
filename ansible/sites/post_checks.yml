@@ -1,0 +1,24 @@
+---
+# Do not remove. Must gather facts before running any other roles.
+- hosts: confluence_dev:jira_dev
+  gather_facts: false
+  
+- hosts: confluence_dev:jira_dev
+  gather_facts: true
+  roles:
+    - { role: ../roles/post_checks }
+  vars: 
+    services:
+      - nagios
+      - splunk
+      - tomcat
+      - jira
+      - confluence
+      - smserver 
+      - smufs 
+      - activemq 
+      - smhybridinfoserver
+      - tomcat
+  become: yes
+  become_user: root
+...

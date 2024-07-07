@@ -1,0 +1,14 @@
+---
+# Hy-Vee, Inc ansible Module store
+galaxy_info:
+  author: 
+    - Infra - Linux Team
+  description: Central Inventory for ansible
+  license: MIT
+  platforms:
+    - name: RedHat
+    - name: CentOS
+    - name: SUSE
+  categories:
+    - system
+...

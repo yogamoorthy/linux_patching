@@ -1,0 +1,83 @@
+---
+######################## The Below tasks will run on Linux Hosts and Fetch the report ######################
+
+# - name: Capture timestamp in uptime role
+#   shell: date +"%Y%m%d%H%M%S"
+#   register: current_date_time
+
+# - name: Create a empty file under /home/ansible
+#   file: 
+#     path: "{{ dump_dir }}"
+#     state: absent  
+#     mode: 0766
+#   become: yes
+
+# - name: delete /home/ansible/findout
+#   file:
+#     path: /home/ansible/findout
+#     state: absent
+
+# - name: Get world writable permissions for other users
+#   shell: find / -type f -perm -o+w ! -path "/proc/*" ! -path "/sys/*" -exec ls -l {} \; >> {{ dump_dir }}-{{ current_date_time.stdout }}.txt
+#   register: shell
+#   become: yes
+
+# - name: Fetch the output file
+#   fetch: src={{ dump_dir }}-{{ inventory_hostname }}-{{ current_date_time.stdout }}.txt dest={{ dump_dir }}-{{ inventory_hostname }}-{{ current_date_time.stdout }}.txt flat=yes
+#   become: yes
+
+- name: Fetch the output file
+  fetch:
+    src: /tmp/transaction_export/transaction_export.zip
+    #patterns: "*.txt"
+    #file_type: "file"
+    dest: /home/yagamoorthy_s/
+  become: yes
+  #delegate_to: localhost
+  
+# - name: Create a empty file under /home/yagamoorthy_s/
+#   file: 
+#     path: "{{ dump_dir }}/file"
+#     state: touch  
+#     mode: 0766
+#   become: yes 
+
+
+# - name: Fetch the output file
+#   fetch: src={{ dump_dir }}/uptime-{{ inventory_hostname }}-{{ current_date_time.stdout }}.txt dest={{ dump_dir }}/uptime-{{ inventory_hostname }}-{{ current_date_time.stdout }}.txt flat=yes
+#   become: yes
+
+# - name: Create a empty file under /home/yagamoorthy_s/dumps/local_dum/
+#   file: 
+#     path: "{{ dump_dir }}/file"
+#     state: touch  
+#     mode: 0766
+#   become: yes
+
+# - name: Deploy template output
+#   template: src=template/uptime.txt.j2 dest={{ dump_dir }}/uptime-{{ inventory_hostname }}-{{ current_date_time.stdout }}.txt
+#   become: yes
+
+# - name: Fetch the output file
+#   fetch: src={{ dump_dir }}/uptime-{{ inventory_hostname }}-{{ current_date_time.stdout }}.txt dest={{ dump_dir }}/uptime-{{ inventory_hostname }}-{{ current_date_time.stdout }}.txt flat=yes
+#   become: yes
+
+# - name: Create a empty file under /home/yagamoorthy_s/dumps/local_dum/
+#   file: 
+#     path: "{{ dump_dir }}/report.csv"
+#     state: touch  
+#     mode: 0766
+#   become: yes
+
+# - name: Copy from uptime. to file2.txt
+#   copy:
+#     src: "uptime.*"
+#     dest: "{{ dump_dir}}/file.txt"
+#   become: yes
+
+# - name: add line about change on host
+#       shell: "echo {{inventory_hostname}} has change >> {{file}}"
+#       delegate_to: localhost
+#       when: my_test.changed
+#       become: false
+

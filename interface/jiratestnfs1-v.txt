@@ -1,0 +1,15 @@
+ens192: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.34.104  netmask 255.255.255.0  broadcast 192.168.34.255
+        ether 00:50:56:a7:49:48  txqueuelen 1000  (Ethernet)
+        RX packets 279994538  bytes 18011558943 (16.7 GiB)
+        RX errors 0  dropped 6500  overruns 0  frame 0
+        TX packets 1762584  bytes 1703458853 (1.5 GiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 18424  bytes 1020784 (996.8 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 18424  bytes 1020784 (996.8 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0

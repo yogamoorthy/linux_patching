@@ -1,0 +1,23 @@
+<html>
+<body>
+<table style="border: 1px solid black; border-collapse: collapse;">
+<tr bgcolor="#F0F8FF">
+    {% for header in headers.split(",") %}
+    <th style="border: 1px solid black; padding: 8px 16px;">{{ header }}</th>
+    {% endfor %}
+</tr>
+{% for host in ansible_play_batch %}
+<tr>
+  {% set uptime_info = hostvars[host]['dev_info'] %}
+      {% set upgrade_status = 'red' %}
+    {% if uptime_info.split(',')[-1]|string() == 'True' %}
+      {% set upgrade_status = 'green' %}
+    {% endif %}   
+  	{% for value in uptime_info.split(",") %}
+        <td style="border: 1px solid black; padding: 8px 16px; color: {{ upgrade_status }};">{{ value }}</td>
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>

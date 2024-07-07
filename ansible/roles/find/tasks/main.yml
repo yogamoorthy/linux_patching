@@ -1,0 +1,4 @@
+---
+- name: import uptime tasks
+  import_tasks: find.yml
+...

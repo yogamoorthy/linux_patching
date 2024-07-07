@@ -1,0 +1,13 @@
+---
+- name: Set downtime
+  nagiosctl:
+    address: https://datacenterops.hy-vee.net
+    apikey: "{{ vault_nagios_gk_svc }}"
+    action: set-downtime
+    duration: "{{ downtime_duration | int }}"
+    host: "{{ ansible_hostname | lower }}"
+    comment: "{{ comment }}"
+    verify: false
+  delegate_to: localhost
+  become: False
+...

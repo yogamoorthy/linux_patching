@@ -1,0 +1,4 @@
+---
+- name: import pre_checks tasks
+  import_tasks: pre_checks.yml
+...

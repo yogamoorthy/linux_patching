@@ -1,0 +1,6 @@
+---
+
+- name: import upgrade tasks
+  import_tasks: upgrade.yml
+
+...

@@ -1,0 +1,34 @@
+<html>
+<body>
+<table style="border: 1px solid black; border-collapse: collapse;">
+<tr bgcolor="#F0F8FF">
+    {% for header in headers.split(",") %}
+    <th style="border: 1px solid black; padding: 8px 16px;">{{ header }}</th>
+    {% endfor %}
+</tr>
+{% set steps_url="<a href='https://confluence.hy-vee.com/display/NSKB/Resolve+Disk+Issues'>click</a>" %}
+{% set show_url=False %}
+{% for host in ansible_play_batch %}
+<tr>  
+  {% set uptime_info = hostvars[host]['dev_info'] %}
+  {% set boot_availspace = uptime_info.split(",")[-2]|int %}
+              {% set status_color = 'red' %}
+              {% set comment = 'Critical' %} 
+              {% set comment = comment + '  ' + steps_url %}
+        {% if  boot_availspace >= 500 %}  
+              {% set status_color = 'green' %}
+              {% set comment = 'Go Ahead' %}
+        {% endif %}
+        {% if boot_availspace >= 300 and boot_availspace < 500 %}
+              {% set status_color = '#FF8C00' %}
+              {% set comment = 'Warning' %}
+        {% endif %}
+        {% set finalvalue = uptime_info +","+ comment %}
+	{% for value in finalvalue.split(",") %}
+        <td style="border: 1px solid black; padding: 8px 16px; color: {{ status_color }};">{{ value }}</td>
+    {% endfor %}
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>

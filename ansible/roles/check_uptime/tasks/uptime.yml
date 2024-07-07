@@ -1,0 +1,54 @@
+---
+######################## The below task will be run on Linux Hosts and Fetch the report ######################
+
+- name: Capture timestamp in uptime role
+  shell: date +"%Y%m%d%H%M%S"
+  register: current_date_time
+
+- name: Gather last reboot
+  ansible.builtin.shell: who -b
+  register: rebooted
+  become: yes
+
+- name: Uptime in seconds
+  shell: cat /proc/uptime | awk '{print $1}'
+  register: uptimeinseconds
+  become: yes
+
+- name: Check Uptime in uptime role
+  shell: uptime | cut -d ',' -f1
+  register: uptime
+  become: yes
+
+- name: Get latest patch details 
+  shell: "{{ linux_commands[ ansible_facts['os_family']|lower + '_command' ] }}"
+  register: patch_details
+  become: yes
+
+- name: Build out CSV content
+  set_fact:
+    dev_info: "{{ ansible_hostname }},{{ ansible_default_ipv4.address }},{{ ansible_kernel }},{{ rebooted.stdout }},{{ uptime.stdout }},{{ uptimeinseconds.stdout }},{{ patch_details.stdout }}"
+  become: yes
+
+################# The below two task will be run in localhost  #################
+
+- name: Generate CSV file
+  template: 
+    src: templates/uptime.txt.j2 
+    dest: "{{ csv_path }}/{{ csv_filename }}"
+  delegate_to: localhost
+  
+- name: Send Email
+  mail:
+    host: "{{ email_host }}"
+    from: "{{ email_from }}"
+    port: 25
+    to: "{{ email_to }}"
+    subject: "[Ansible] *{{ email_subject }}*"
+    body: "{{ lookup('template', 'templates/report.html.j2', errors='ignore') }}"
+    attach: "{{ csv_path }}/{{ csv_filename }}"
+    subtype: html
+  run_once: true
+  delegate_to: localhost
+...
+

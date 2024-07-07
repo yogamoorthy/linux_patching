@@ -1,0 +1,20 @@
+---
+group_hostnames: "{{ groups['wms_ldc_dev_app'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+admin_user: scopeadm
+pri_svc_url: ldcdevapp1a-v
+sec_svc_url: ldcdevapp1b-v
+
+mip_name: mip
+mda_name: mda
+wm_name: wms
+lm_name: lm
+db_name: db
+
+wm_db_servicename: ldcwmdevsvc
+wm_db_schemaname: ldcwm
+wm_db_pass: "U2FsdGVkX1/QN3ic1hSvZaAvb0VZGFo5fLByhvRd5xw="
+wm_db_salt: 0aac7d1afe37429494277e2fc12b69f5
+wm_env: "LDCDev"
+vocollect_port: 23500
+vocollect_endpoint_id: 21
+...

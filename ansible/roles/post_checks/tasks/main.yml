@@ -1,0 +1,4 @@
+---
+- name: import post_checks tasks
+  import_tasks: post_checks.yml
+...

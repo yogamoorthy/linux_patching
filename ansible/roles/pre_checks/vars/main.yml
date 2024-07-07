@@ -1,0 +1,13 @@
+---
+
+#email settings
+email_subject: Pre_Check report 
+email_host: smtp.hy-vee.com
+email_from: root@localhost
+email_to: yagamoorthy.s@hy-vee.com
+#email_to: infralinux@hy-vee.com
+
+#random settings
+csv_path: /tmp
+csv_filename: pre_checks.csv 
+headers: Hostname,Ip Address,Kernel Version,Boot_TotalSize Used and Avail,Temp_Total Size Used and Avail,boot_availspace,Uptime,comment

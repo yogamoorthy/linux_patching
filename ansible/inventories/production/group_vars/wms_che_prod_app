@@ -1,0 +1,21 @@
+---
+group_hostnames: "{{ groups['wms_che_prod_app'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+admin_user: scopeadm
+pri_svc_url: cheapp1a-v
+sec_svc_url: cheapp1b-v
+
+mip_name: mipprod
+mda_name: mdaprod
+wm_name: wmsprod
+lm_name: lmbatchprod
+db_name: dbprod
+
+wm_db_servicename: chewmsvc
+wm_db_schemaname: chewm
+wm_db_pass: "U2FsdGVkX1/QN3ic1hSvZaAvb0VZGFo5fLByhvRd5xw="
+wm_db_salt: 0aac7d1afe37429494277e2fc12b69f5
+wm_env: "Cherokee Prod"
+
+vocollect_port: 23500
+vocollect_endpoint_id: 21
+...

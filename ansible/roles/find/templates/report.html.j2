@@ -1,0 +1,26 @@
+<html>
+<body>
+<table style="border: 1px solid black; border-collapse: collapse;">
+<tr bgcolor="#FF00FF">
+    {% for header in headers.split(",") %}
+    <th style="border: 1px solid black; padding: 8px 16px;">{{ header }}</th>
+    {% endfor %}
+</tr>
+{% for host in groups['Assets'] %}
+<tr>
+  {% set uptime_info = hostvars[host]['dev_info'] %}
+	{% if  uptime_info.split(",")[-1]|int > uptimedays|int *24*60*60 %}
+		{% set status_color = 'red' %}
+	{% else %}
+		 {% set status_color = 'green' %}
+	{% endif %}
+	{% for value in uptime_info.split(",") %}
+        <td style="border: 1px solid black; padding: 8px 16px; color: {{ status_color }};">{{ value }}</td>
+   {% endfor %}
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>
+
+

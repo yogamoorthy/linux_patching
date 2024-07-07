@@ -1,0 +1,13 @@
+---
+#Test Role for testing connections
+
+galaxy_info:
+  author: William Vanderlip-Mclean
+  description: Test Role for testing connections
+  license: MIT
+  platforms:
+  - name: CentOS
+  - name: RedHat
+  - name: SUSE
+  categories:
+  - system

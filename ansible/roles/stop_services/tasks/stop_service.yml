@@ -1,0 +1,10 @@
+---
+- name: Shutdown Main Application(s)
+  systemd:
+    name: "{{ item }}"
+    state: stopped
+  with_items: "{{ main_app }}"
+  when: main_app != "everseen"
+#  notify: Start Main Application(s)
+  
+...

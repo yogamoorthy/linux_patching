@@ -1,0 +1,9 @@
+---
+galaxy_info:
+  author: Jiovanni Tapia
+  description: Role for setting Nagios downtime.
+  license: MIT
+  platforms:
+  - name: any
+  categories:
+  - system

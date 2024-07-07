@@ -1,0 +1,10 @@
+---
+# Do not remove. Must gather facts before running any other roles.
+- hosts: gk_prod_app_pos
+  gather_facts: false
+
+- hosts: gk_prod_app_pos
+  gather_facts: true
+  roles:
+    - { role: ../roles/upgrade_linuxhost }
+...

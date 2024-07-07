@@ -1,0 +1,5 @@
+---
+- name: Execute ntp
+  import_tasks: ntp.yml
+  
+...

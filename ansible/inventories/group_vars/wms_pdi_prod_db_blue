@@ -1,0 +1,141 @@
+---
+env: pdi_prod_db
+dynamic_ip_list: "{{ groups['wms_pdi_prod_db_blue'] | map('extract', hostvars,  ['ansible_all_ipv4_addresses']) | join(',') }}"
+group_hostnames: "{{ groups['wms_pdi_prod_db_blue'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+group_fqdn: "{{ groups['wms_pdi_prod_db_blue'] | map('extract', hostvars, ['ansible_fqdn']) | join(',') }}"
+
+scan_name: pdidb1-scan1
+asm_member1: ['pdidb1a-v', 'pdidb1a-v-vip']
+asm_member2: ['pdidb1b-v', 'pdidb1b-v-vip']
+asm_system_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  34656134366464323233353432356465343332306131643135613266653164353461383265376530
+  6464366237656262643161363063646232636533663663340a323938373566363333343835353331
+  32303366353532343063356134636131633331376533663435393930356335663761663233643031
+  6262616230343365620a326631336266646461336135616465633437316237623136353236306538
+  6234
+
+dlun_diskgroup: "ORCL:{{ data_disks.dlun1.name }},ORCL:{{ data_disks.dlun2.name }},ORCL:{{ data_disks.dlun3.name }},ORCL:{{ data_disks.dlun4.name }}"
+
+#[NOTE: scsi controllers you skip the 7th socket]
+data_disks:
+  dlun1:
+    primary_partition: True
+    device: /dev/sdf
+    name: PDIDBDLUN1
+    id: 0
+  dlun2:
+    primary_partition: True
+    device: /dev/sdg
+    name: PDIDBDLUN2
+    id: 1
+  dlun3:
+    primary_partition: True
+    device: /dev/sdh
+    name: PDIDBDLUN3
+    id: 2
+  dlun4:
+    primary_partition: True
+    device: /dev/sdi
+    name: PDIDBDLUN4
+    id: 3
+  flun1:
+    primary_partition: True
+    device: /dev/sdj
+    name: PDIDBFLUN1
+    id: 4
+  flun2:
+    primary_partition: True
+    device: /dev/sdk
+    name: PDIDBFLUN2
+    id: 5
+  flun3:
+    primary_partition: True
+    device: /dev/sdl
+    name: PDIDBFLUN3
+    id: 6
+  quorum1:
+    primary_partition: True
+    device: /dev/sdm
+    name: PDIDBQUORUM1
+    id: 8
+  quorum2:
+    primary_partition: True
+    device: /dev/sdn
+    name: PDIDBQUORUM2
+    id: 9
+  quorum3:
+    primary_partition: True
+    device: /dev/sdo
+    name: PDIDBQUORUM3
+    id: 10
+
+application_disks:
+  # Expand Disks for RHEL_Template image
+  #  - (This section is not needed for rhel72-template image)
+  # sda3-tmp:
+  #   device: /dev/sda
+  #   pvs: /dev/sda2,/dev/sda3
+  #   vg: rhel
+  #   lv: tmp
+  #   mapper_path: /dev/mapper/rhel-tmp
+  #   mounted_path: /tmp
+  #   size: 10G
+  #   number: 3
+  #   primary_partition: False
+  sda3-swap:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: swap
+    mapper_path: /dev/mapper/rhel-swap
+    mounted_path: swap
+    mounted_state: present
+    number: 3
+    size: 21G
+    fstype: swap
+    primary_partition: False
+  sda3-root:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: root
+    mapper_path: /dev/mapper/rhel-root
+    mounted_path: /
+    number: 3
+    resizefs: True
+    primary_partition: False
+  sdb:
+    device: /dev/sdb
+    pvs: /dev/sdb1
+    vg: oracle
+    lv: u01
+    mapper_path: /dev/mapper/oracle-u01
+    mounted_path: /u01
+    primary_partition: True
+  sdc:
+    device: /dev/sdc
+    pvs: /dev/sdc1
+    vg: dbvisit
+    lv: vol01
+    mapper_path: /dev/mapper/dbvisit-vol01
+    mounted_path: /usr/dbvisit
+    primary_partition: True
+  sdd:
+    device: /dev/sdd
+    pvs: /dev/sdd1
+    vg: oraclebackups
+    lv: vol01
+    mapper_path: /dev/mapper/oraclebackups-vol01
+    mounted_path: /oracle/backups
+    primary_partition: True
+  # This is a tmp disk to store the large data dump of the database
+  sde:
+    device: /dev/sde
+    pvs: /dev/sde1
+    vg: dbvisit_tmp
+    lv: vol02
+    mapper_path: /dev/mapper/dbvisit_tmp-vol02
+    mounted_path: /usr/dbvisit_tmp
+    primary_partition: True
+...

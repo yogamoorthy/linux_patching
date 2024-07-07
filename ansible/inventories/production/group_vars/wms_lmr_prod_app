@@ -1,0 +1,22 @@
+---
+group_hostnames: "{{ groups['wms_lmr_prod_app'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+admin_user: scopeadm
+pri_svc_url: lmrapp1a-v
+sec_svc_url: lmrapp1b-v
+
+mip_name: mip
+mda_name: mda
+wm_name: wms
+lm_name: lm
+db_name: db
+
+wm_db_username: nagios
+wm_db_servicename: lmrwmsvc
+wm_db_schemaname: lmrwm
+wm_db_pass: "U2FsdGVkX1/QN3ic1hSvZaAvb0VZGFo5fLByhvRd5xw="
+wm_db_salt: 0aac7d1afe37429494277e2fc12b69f5
+wm_env: "Lomar Prod"
+
+vocollect_port:
+vocollect_endpoint_id: 261
+...

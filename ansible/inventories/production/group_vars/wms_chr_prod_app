@@ -1,0 +1,43 @@
+---
+group_hostnames: "{{ groups['wms_chr_prod_app'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+admin_user: scopeadm
+vocollect_endpoint_id: 21
+pri_svc_url: chrapp1a-v
+sec_svc_url: chrapp1b-v
+# GRO
+gro_mip_name: mip
+gro_mda_name: mda
+gro_wm_name: wms
+gro_lm_name: lmbatch
+gro_db_name: dashboard
+gro_wm_db_servicename: chrwmsvc
+gro_wm_db_schemaname: chrwmgro
+gro_wm_db_pass: "U2FsdGVkX1/QN3ic1hSvZaAvb0VZGFo5fLByhvRd5xw="
+gro_wm_db_salt: 0aac7d1afe37429494277e2fc12b69f5
+gro_wm_env: "Chariton GRO Prod"
+gro_vocollect_port: 12500
+# HBC
+hbc_mip_name: mip
+hbc_mda_name: mda
+hbc_wm_name: wms
+hbc_lm_name: lmbatch
+hbc_db_name: dashboard
+hbc_wm_db_servicename: chrwmsvc
+hbc_wm_db_schemaname: chrwmhbc
+hbc_wm_db_pass: "U2FsdGVkX1/QN3ic1hSvZaAvb0VZGFo5fLByhvRd5xw="
+hbc_wm_db_salt: 0aac7d1afe37429494277e2fc12b69f5
+hbc_wm_env: "Chariton HBC Prod"
+hbc_vocollect_port: 17500
+# PER 
+per_mip_name: mip
+per_mda_name: mda
+per_wm_name: wms
+per_lm_name: lmbatch
+per_db_name: dashboard
+per_wm_db_servicename: chrwmsvc
+per_wm_db_schemaname: chrwmper
+per_wm_db_pass: "U2FsdGVkX1/QN3ic1hSvZaAvb0VZGFo5fLByhvRd5xw="
+per_wm_db_salt : 0aac7d1afe37429494277e2fc12b69f5
+per_wm_env: "Chariton PER Prod"
+per_vocollect_port: 22500
+...

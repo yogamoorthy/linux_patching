@@ -1,0 +1,52 @@
+---
+
+##################################### The below task will be run on Linux Hosts  #####################################################
+
+
+- name: Task 1 - Grab the total,Used and Avail size of /boot filesystem
+  shell: df -hP /boot |grep -iv "filesystem" |awk '{ print $2,$3,$4 }'
+  register: boot
+  become: yes
+
+- name: Task 2 - Grab the Total,Used and Avail size of /tmp filesystem
+  shell:  df -hP /tmp | grep -iv "filesystem" |awk '{ print $2,$3,$4 }'
+  register: tmp
+  become: yes
+
+- name: Task 3 - Grab the Avail Space of /boot filesystem
+  shell: df -m /boot --output\=avail |grep -iv "Avail"
+  register: boot_availspace
+  become: yes
+
+- name: Task 4 - Grab the Uptime report
+  shell: uptime | cut -d ',' -f1
+  register: uptime
+  become: yes
+
+- name: Task 5 - Build out CSV content
+  set_fact:
+    dev_info: "{{ ansible_hostname }},{{ ansible_default_ipv4.address }},{{ ansible_kernel }},{{ boot.stdout }},{{ tmp.stdout }},{{ boot_availspace.stdout }},{{ uptime.stdout }}"
+  become: yes 
+
+######################## The below two task will be run in localhost #####################################
+
+- name: Generate CSV file
+  template: 
+    src: templates/upgrade.txt.j2 
+    dest: "{{ csv_path }}/{{ csv_filename }}"
+  delegate_to: localhost
+
+- name: Send Email
+  mail:
+    host: "{{ email_host }}"
+    from: "{{ email_from }}"
+    port: 25
+    to: "{{ email_to }}"
+    subject: "[Ansible] *{{ email_subject }}*"
+    body: "{{ lookup('template', 'templates/report.html.j2', errors='ignore') }}"
+    attach: "{{ csv_path }}/{{ csv_filename }}"
+    subtype: html
+  run_once: true
+  delegate_to: localhost
+
+...

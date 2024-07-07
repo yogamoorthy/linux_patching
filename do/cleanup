@@ -1,0 +1,7 @@
+#!/bin/bash
+
+rm -fr ./ansible/inventories
+rm -fr ./venv
+rm -fr ./ansible/roles
+rm -fr ./ansible/modules
+rm -f ./ansible/etc/ansible_vault_key.txt

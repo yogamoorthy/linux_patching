@@ -1,0 +1,80 @@
+2024-02-15 14:54:54,243 p=850 u=yagamoorthy_s n=ansible | [WARNING]:  * Failed to parse /home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/hosts with script plugin:
+problem running /home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/hosts --list ([Errno 8] Exec format
+error: '/home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/hosts')
+
+2024-02-15 14:54:54,243 p=850 u=yagamoorthy_s n=ansible | [WARNING]:  * Failed to parse /home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/hosts with yaml plugin: We
+were unable to read either as JSON nor YAML, these are the errors we got from each: JSON: Expecting value: line 1
+column 1 (char 0)  Syntax Error while loading YAML.   did not find expected <document start>  The error appears to be
+in '/home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/hosts': line 7, column 1, but may be elsewhere in
+the file depending on the exact syntax problem.  The offending line appears to be:  [confluence_all:children]
+confluence_prod ^ here
+
+2024-02-15 14:54:54,244 p=850 u=yagamoorthy_s n=ansible | [WARNING]:  * Failed to parse /home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/hosts with ini plugin:
+can't add group to itself
+
+2024-02-15 14:54:54,244 p=850 u=yagamoorthy_s n=ansible | [WARNING]: Unable to parse /home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/hosts as an inventory source
+
+2024-02-15 14:54:54,248 p=850 u=yagamoorthy_s n=ansible | [WARNING]: Skipping key (author) in group (galaxy_info) as it is not a mapping, it is a <class
+'ansible.parsing.yaml.objects.AnsibleSequence'>
+
+2024-02-15 14:54:54,248 p=850 u=yagamoorthy_s n=ansible | [WARNING]: Skipping key (description) in group (galaxy_info) as it is not a mapping, it is a <class
+'ansible.parsing.yaml.objects.AnsibleUnicode'>
+
+2024-02-15 14:54:54,248 p=850 u=yagamoorthy_s n=ansible | [WARNING]: Skipping key (license) in group (galaxy_info) as it is not a mapping, it is a <class
+'ansible.parsing.yaml.objects.AnsibleUnicode'>
+
+2024-02-15 14:54:54,249 p=850 u=yagamoorthy_s n=ansible | [WARNING]: Skipping key (platforms) in group (galaxy_info) as it is not a mapping, it is a <class
+'ansible.parsing.yaml.objects.AnsibleSequence'>
+
+2024-02-15 14:54:54,249 p=850 u=yagamoorthy_s n=ansible | [WARNING]: Skipping key (categories) in group (galaxy_info) as it is not a mapping, it is a <class
+'ansible.parsing.yaml.objects.AnsibleSequence'>
+
+2024-02-15 14:54:54,257 p=850 u=yagamoorthy_s n=ansible | [WARNING]:  * Failed to parse /home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/production/hosts with
+script plugin: problem running /home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/production/hosts --list
+([Errno 8] Exec format error: '/home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/production/hosts')
+
+2024-02-15 14:54:54,258 p=850 u=yagamoorthy_s n=ansible | [WARNING]:  * Failed to parse /home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/production/hosts with yaml
+plugin: We were unable to read either as JSON nor YAML, these are the errors we got from each: JSON: Expecting value:
+line 1 column 1 (char 0)  Syntax Error while loading YAML.   did not find expected <document start>  The error appears
+to be in '/home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/production/hosts': line 5, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.  The offending line appears to be:  [confluence_prod]
+corpconflu1-v ^ here
+
+2024-02-15 14:54:54,259 p=850 u=yagamoorthy_s n=ansible | [WARNING]:  * Failed to parse /home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/production/hosts with ini
+plugin: /home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/production/hosts:38: Section
+[wms_prod_db_all:children] includes undefined group: wms_che_prod_db
+
+2024-02-15 14:54:54,259 p=850 u=yagamoorthy_s n=ansible | [WARNING]: Unable to parse /home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/production/hosts as an
+inventory source
+
+2024-02-15 14:54:54,260 p=850 u=yagamoorthy_s n=ansible | [WARNING]: Unable to parse /home/yagamoorthy_s/dev/ansible-workspace1/ansible/inventories/production as an inventory
+source
+
+2024-02-15 14:54:54,512 p=850 u=yagamoorthy_s n=ansible | PLAY [Nagios] **********************************************************************************************************
+2024-02-15 14:54:54,523 p=850 u=yagamoorthy_s n=ansible | PLAY [Nagios] **********************************************************************************************************
+2024-02-15 14:54:54,527 p=850 u=yagamoorthy_s n=ansible | TASK [Gathering Facts] *************************************************************************************************
+2024-02-15 14:55:07,921 p=850 u=yagamoorthy_s n=ansible | ok: [conflutest-v]
+2024-02-15 14:55:07,933 p=850 u=yagamoorthy_s n=ansible | TASK [../roles/pre_checks : Task 1 - Grab the total,Used and Avail size of /boot filesystem] ***************************
+2024-02-15 14:55:14,320 p=850 u=yagamoorthy_s n=ansible | changed: [conflutest-v]
+2024-02-15 14:55:14,326 p=850 u=yagamoorthy_s n=ansible | TASK [../roles/pre_checks : Task 2 - Grab the Total,Used and Avail size of /tmp filesystem] ****************************
+2024-02-15 14:55:20,232 p=850 u=yagamoorthy_s n=ansible | changed: [conflutest-v]
+2024-02-15 14:55:20,239 p=850 u=yagamoorthy_s n=ansible | TASK [../roles/pre_checks : Task 3 - Grab the Avail Space of /boot filesystem] *****************************************
+2024-02-15 14:55:26,298 p=850 u=yagamoorthy_s n=ansible | changed: [conflutest-v]
+2024-02-15 14:55:26,303 p=850 u=yagamoorthy_s n=ansible | TASK [../roles/pre_checks : Task 4 - Grab the Uptime report] ***********************************************************
+2024-02-15 14:55:33,247 p=850 u=yagamoorthy_s n=ansible | changed: [conflutest-v]
+2024-02-15 14:55:33,253 p=850 u=yagamoorthy_s n=ansible | TASK [../roles/pre_checks : Task 5 - Build out CSV content] ************************************************************
+2024-02-15 14:55:33,299 p=850 u=yagamoorthy_s n=ansible | ok: [conflutest-v]
+2024-02-15 14:55:33,303 p=850 u=yagamoorthy_s n=ansible | TASK [../roles/pre_checks : Generate CSV file] *************************************************************************
+2024-02-15 14:55:34,524 p=850 u=yagamoorthy_s n=ansible | [0;31m--- before: /tmp/pre_checks.csv[0m
+[0;31m[0m[0;32m+++ after: /home/yagamoorthy_s/.ansible/tmp/ansible-local-8504yykttg3/tmp05ognbrp/upgrade.txt.j2[0m
+[0;32m[0m[0;36m@@ -1,2 +1,2 @@[0m
+[0;36m[0m Hostname,Ip Address,Kernel Version,Boot_TotalSize Used and Avail,Temp_Total Size Used and Avail,boot_availspace,Uptime
+[0;31m-conflutest-v,192.168.34.60,3.10.0-1160.105.1.el7.x86_64,497M 213M 285M,50G 44G 6.7G,  285, 03:11:39 up 28 days[0m
+[0;31m[0m[0;32m+conflutest-v,192.168.34.60,3.10.0-1160.105.1.el7.x86_64,497M 213M 285M,50G 44G 6.7G,  285, 03:25:32 up 28 days[0m
+[0;32m[0m
+
+2024-02-15 14:55:34,524 p=850 u=yagamoorthy_s n=ansible | changed: [conflutest-v -> localhost]
+2024-02-15 14:55:34,528 p=850 u=yagamoorthy_s n=ansible | TASK [../roles/pre_checks : Send Email] ********************************************************************************
+2024-02-15 14:55:39,321 p=850 u=yagamoorthy_s n=ansible | ok: [conflutest-v -> localhost]
+2024-02-15 14:55:39,332 p=850 u=yagamoorthy_s n=ansible | PLAY RECAP *************************************************************************************************************
+2024-02-15 14:55:39,332 p=850 u=yagamoorthy_s n=ansible | conflutest-v               : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

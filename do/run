@@ -1,0 +1,105 @@
+#!/bin/bash
+
+export ANSIBLE_CONFIG="etc/ansible.cfg"
+export ANSIBLE_HOST_KEY_CHECKING=False
+export ANSIBLE_VAULT_KEY=etc/ansible_vault_key.txt
+
+if [ -d "./venv" ]; then
+  echo "Virtual Python Environment Found"
+  source ./venv/bin/activate
+else
+  echo "Error: execute 'make setup' before this step"
+  exit 1
+fi
+
+array=(stage dev qa prod)
+
+select choice in "${array[@]}"; do
+    [[ -n $choice ]] || { echo "Invalid choice. Please try again." >&2; continue; }
+    ENVIRONMENT="$choice"
+    break
+done
+
+
+pushd ansible
+ if [ "$1" == "-c" ]; then
+  ansible-playbook site.yml --diff -u ansible --limit ${ENVIRONMENT} --check
+  
+ else
+ # ansible-playbook site.yml --diff -u ansible --limit ${ENVIRONMENT}
+  ansible-playbook site.yml --diff -u ansible
+fi
+popd
+
+
+# if [ -d "./venv" ]; then 
+#   echo "Upgrade all packages on Linux Hosts"
+#   source ./venv/bin/activate
+# else
+#   echo "Error: execute 'make setup' before this step"
+#   exit 1
+# fi
+
+# array=(precheck stop_service upgrade postcheck)
+
+# # Take input for action 
+# select choice in "${array[@]}"; do
+#     [[ -n $choice ]] || { echo "Invalid choice. Please try again." >&2; continue; }
+#     ACTION="$choice"
+#     break
+# done
+# if [ "$ACTION" == "upgrade" ]; then
+
+# reboot_choice=(yes no)
+# # Take input for reboot and run reboot tasks based on input 
+# 	echo "Do you want to perform reboot ? "
+# select choice in "${reboot_choice[@]}"; do
+# 		[[ -n $choice ]] || { echo "Invalid choice. Please try again." >&2; continue; }
+# 		DO_REBOOT="$choice"
+#     break
+# 	done
+# fi
+# pushd ansible
+# if [ "$ACTION" == "precheck" ]; then
+#   echo "--------------------------------------------------- Running precheck tasks ----------------------------------------------------"
+#   ansible-playbook ./sites/pre_checks.yml --diff -u ansible 
+# elif [ "$ACTION" == "stop_service" ]; then
+#   echo "----------------------------------------------- Running stop service tasks ---------------------------------------------------"
+#   ansible-playbook ./sites/stop_service.yml --diff -u ansible 
+# elif [ "$ACTION" == "upgrade" ]; then
+#   echo "--------------------------------------------------- Runing upgrade tasks -----------------------------------------------------"
+	
+#   	if [ "$DO_REBOOT" == "yes" ]; then 
+#       echo "----------------------------------------------- Running reboot tasks  ------------------------------------------------------"
+# 		  ansible-playbook   ./sites/upgrade.yml --diff -u ansible 	
+#     else
+#       ansible-playbook --skip-tags reboot  ./sites/upgrade.yml --diff -u ansible 
+#     fi
+# else 
+#   echo "--------------------------------------------------- Running postcheck tasks ----------------------------------------------------"
+#   ansible-playbook ./sites/post_checks.yml --diff -u ansible # --diff - performing any action on the target machine. 
+#  #ansible-playbook site.yml -vvvv -u ansible
+# fi
+# popd
+
+
+# array=(precheck upgrade postcheck)
+
+# select choice in "${array[@]}"; do
+#     [[ -n $choice ]] || { echo "Invalid choice. Please try again." >&2; continue; }
+#     ACTION="$choice"
+#     break
+# done
+
+# pushd ansible
+# if [ "$ACTION" == "precheck" ]; then
+#   ansible-playbook ./sites/pre_checks.yml --diff -u ansible 
+
+# elif [ "$ACTION" == "upgrade" ]; then
+#   ansible-playbook ./sites/upgrade.yml --diff -u ansible 
+# else 
+#   ansible-playbook ./sites/post_checks.yml --diff -u ansible # --diff - performing any action on the target machine. 
+
+#  ansible-playbook site.yml -vvvv -u ansible
+# fi
+#popd

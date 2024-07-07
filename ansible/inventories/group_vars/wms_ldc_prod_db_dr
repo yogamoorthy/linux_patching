@@ -1,0 +1,87 @@
+---
+env: ldc_prod_db_dr
+dynamic_ip_list: "{{ groups['wms_ldc_prod_db_dr'] | map('extract', hostvars,  ['ansible_all_ipv4_addresses']) | join(',') }}"
+group_hostnames: "{{ groups['wms_ldc_prod_db_dr'] | map('extract', hostvars, ['ansible_hostname']) | join(',') }}"
+group_fqdn: "{{ groups['wms_ldc_prod_db_dr'] | map('extract', hostvars, ['ansible_fqdn']) | join(',') }}"
+
+asm_member1: ['ldcdb1c-v', '10.134.64.114']
+asm_system_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  38623439313535333861343964613238343034373138643563316530346235373863336464313036
+  3366303566313339393364326264646563656630366530660a376532383962626132303837656465
+  32323135613465373235396464393666346339393535346436326566376438303533343465353264
+  6130643663616131620a653366366331313936393866623364316533636335333665353132323732
+  6166
+
+dlun_diskgroup: "ORCL:{{ data_disks.dlun1.name }},ORCL:{{ data_disks.dlun2.name }}"
+flun_diskgroup: "ORCL:{{ data_disks.flun1.name }},ORCL:{{ data_disks.flun2.name }},ORCL:{{ data_disks.flun3.name }}"
+oracle_install_option: HA_CONFIG
+
+#[NOTE: scsi controllers you skip the 7th socket]
+data_disks:
+  dlun1:
+    primary_partition: True
+    device: /dev/sdd
+    name: LDCDBDLUN1
+    id: 0
+  dlun2:
+    primary_partition: True
+    device: /dev/sde
+    name: LDCDBDLUN2
+    id: 1
+  flun1:
+    primary_partition: True
+    device: /dev/sdf
+    name: LDCDBFLUN1
+    id: 2
+  flun2:
+    primary_partition: True
+    device: /dev/sdg
+    name: LDCDBFLUN2
+    id: 3
+  flun3:
+    primary_partition: True
+    device: /dev/sdh
+    name: LDCDBFLUN3
+    id: 4
+
+application_disks:
+  sda3-swap:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: swap
+    mapper_path: /dev/mapper/rhel-swap
+    mounted_path: swap
+    mounted_state: present
+    number: 3
+    size: 21G
+    fstype: swap
+    primary_partition: False
+  sda3-root:
+    device: /dev/sda
+    pvs: /dev/sda2,/dev/sda3
+    vg: rhel
+    lv: root
+    mapper_path: /dev/mapper/rhel-root
+    mounted_path: /
+    number: 3
+    resizefs: True
+    primary_partition: False
+  sdb:
+    device: /dev/sdb
+    pvs: /dev/sdb1
+    vg: oracle
+    lv: u01
+    mapper_path: /dev/mapper/oracle-u01
+    mounted_path: /u01
+    primary_partition: True
+  sdc:
+    device: /dev/sdc
+    pvs: /dev/sdc1
+    vg: dbvisit
+    lv: vol01
+    mapper_path: /dev/mapper/dbvisit-vol01
+    mounted_path: /usr/dbvisit
+    primary_partition: True
+...

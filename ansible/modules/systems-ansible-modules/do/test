@@ -1,0 +1,13 @@
+#!/bin/bash
+
+. .venv/bin/activate
+
+echo "Executing Black Formating..."
+pipenv run black ./lib
+echo "-----------------------------------------"
+echo "Executing Python linting..."
+pipenv run flake8 ./lib
+echo "-----------------------------------------"
+echo "Executing Python security linting..."
+pipenv run bandit -r ./lib
+echo "-----------------------------------------"

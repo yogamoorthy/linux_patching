@@ -1,0 +1,18 @@
+---
+- name: Backup ntp conf file
+  copy:
+    src: /etc/ntp.conf
+    dest: /etc/ntp.conf.bak
+    remote_src: yes
+ 
+- name: add line
+  lineinfile:
+    path: "/etc/ntp.conf"
+    line: "restrict default nomodify nopeer noquery notrap"
+    insertafter: "#restrict -4 default notrap nomodify nopeer noquery"
+
+- name: Restart ntp service
+  systemd:
+    name: ntpd
+    state: restarted 
+...
